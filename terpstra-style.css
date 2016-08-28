@@ -1,0 +1,91 @@
+body {
+    /*margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: white;*/
+}
+#fullscreen-setter {
+    background: black;
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer
+}
+#keyboard {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    display: none;
+}
+#backButton {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    display: none;
+    z-index: 100;
+}
+.iosscrollable {
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.u-half-width {
+  width: 47%;
+  box-sizing: border-box; 
+  float: left;
+}
+
+.rpad{
+    margin-right: 10px;
+}
+
+select#quicklinks {
+    max-width: 100%;
+}
+
+.button, button, input[type="submit"], input[type="reset"], input[type="button"]
+{
+    max-width: 100%;
+}
+
+@media screen and (max-width: 550px) {
+    input[type="number"] {
+        width: 100%;
+    }
+    select#instrument {
+        width: 100%;
+    }
+
+}
+@media screen and (max-width: 350px) {
+    .button, button, input[type="submit"], input[type="reset"], input[type="button"]
+    {
+        padding: 0 10px;
+    }
+}
+
+/*textarea {
+    //font-family: cursive;
+    color: #777;
+    background: #D8F7EE; 
+    box-shadow: 0px 3px 15px hsla(0,0%,0%,.08);
+    margin: 40px auto;
+    position: relative;
+    //width: 350px;
+    border: 1px solid #B2C1EA;
+    background-image: -webkit-radial-gradient(#d6d5d6 30%, transparent 20%), -webkit-radial-gradient(#cfcfc3 38%, transparent 24%), -webkit-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
+    background-image: -moz-radial-gradient(#d6d5d6 30%, transparent 20%), -moz-radial-gradient(#cfcfc3 38%, transparent 24%), -moz-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
+    background-image: radial-gradient(#d6d5d6 30%, transparent 20%), radial-gradient(#cfcfc3 38%, transparent 24%), linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
+    background-position: 4px 1px, 4px 0px, 50% 0px;
+    background-repeat: repeat-y, repeat-y, repeat;
+    background-size: 30px 30px, 30px 30px, 30px 30px;
+    //padding: 36px 48px 23px 80px;
+    padding-left: 30px;
+}*/

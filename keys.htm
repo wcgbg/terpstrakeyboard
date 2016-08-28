@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Terpstra Keyboard WebApp</title>
 	
@@ -10,48 +11,11 @@
 	
 	<link rel="stylesheet" href="normalize.css">
 	<link rel="stylesheet" href="skeleton.css">
+	<link rel="stylesheet" href="terpstra-style.css">
 	
-	<style>
-		body {
-			/*margin: 0;
-			padding: 0;
-			background-color: #000000;
-			color: white;*/
-		}
-		#fullscreen-setter {
-			background: black;
-			color: white;
-			border-radius: 1em;
-			padding: 1em;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			margin-right: -50%;
-			transform: translate(-50%, -50%);
-			cursor: pointer
-		}
-		#keyboard {
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			top: 50%;
-			left: 50%;
-			display: none;
-		}
-		#backButton {
-			position: absolute;
-			left: 0;
-			top: 50%;
-			display: none;
-			z-index: 100;
-		}
-		.iosscrollable {
-			height: auto;
-			-webkit-overflow-scrolling: touch;
-		}
-	</style>
 	
 	<script src="QueryData.js"></script>
+	<script src="jscolor.js"></script>
 </head>
 
 <body style="overflow: scroll;">
@@ -63,35 +27,41 @@
 			<select id="quicklinks" onchange="javascript:location.href = this.value;">
 				<option selected="selected" disabled="disabled">Tuning\Layout Quick Links</option>
 				<optgroup label="Isomorphic Layouts for 12-ET">
-					<option value="keys.htm?fundamental=261.6255653&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&piano_colors=true&no_labels=false&scale=!%2012-ed2%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB">Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
+					<option value="keys.htm?fundamental=261.6255653&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff">Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
 					
-					<option value="keys.htm?fundamental=261.6255653&right=4&upright=7&size=50&rotation=343.897886248&instrument=harpsichord&enum=false&equivSteps=12&piano_colors=true&no_labels=false&scale=!%2012-ed2%20Harmonic%20Table%20Sonome%20Tonnetz%205-Limit%20Tuning%20Lattice%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony).scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Harmonic%20Table%20layout%2C%20also%20known%20as%20Sonome%3A%20a%20tonal%20array%20topologically%20equivalent%20to%20Euler%27s%20Tonnetz%2C%20which%20is%20a%20conceptual%20lattice%20diagram%20representing%20tonal%20space%2C%20also%20known%20as%205-Limit%20Tuning%20Lattice%20or%20Tri-Axial%20The%20Matrix%20Model%20(of%20Musical%20Harmony).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Harmonic%20Table%20%2F%20Sonome%20%2F%20Tonnetz%20%2F%205-Limit%20Tuning%20Lattice%20%2F%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony)%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB">Harmonic Table / Sonome / Tonnetz / 5-L Lattice / Matrix Model</option>
+					<option value="keys.htm?fundamental=261.6255653&right=4&upright=7&size=50&rotation=343.897886248&instrument=harpsichord&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Harmonic%20Table%20Sonome%20Tonnetz%205-Limit%20Tuning%20Lattice%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony).scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Harmonic%20Table%20layout%2C%20also%20known%20as%20Sonome%3A%20a%20tonal%20array%20topologically%20equivalent%20to%20Euler%27s%20Tonnetz%2C%20which%20is%20a%20conceptual%20lattice%20diagram%20representing%20tonal%20space%2C%20also%20known%20as%205-Limit%20Tuning%20Lattice%20or%20Tri-Axial%20The%20Matrix%20Model%20(of%20Musical%20Harmony).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Harmonic%20Table%20%2F%20Sonome%20%2F%20Tonnetz%20%2F%205-Limit%20Tuning%20Lattice%20%2F%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony)%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0Abababa%0A8ef4fb%0Abababa%0Affffff%0Affffff%0Abababa%0Affffff%0A49aded%0Affffff%0Abababa%0Affffff">Harmonic Table / Sonome / Tonnetz / 5-L Lattice / Matrix Model</option>
                     
-					<option value="keys.htm?fundamental=261.6255653&right=2&upright=7&size=50&rotation=343.897886248&instrument=rhodes&enum=false&equivSteps=12&piano_colors=true&no_labels=false&scale=!%2012-ed2%20Wicki-Hayden.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Wicki-Hayden%20layout%2C%20originally%20devised%20for%20the%20bandoneon%20and%20concertina%20(free-reed%20aerophones%20of%20the%20harmonica%2Faccordion%20family).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Wicki-Hayden%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB">Wicki-Hayden</option>
+					<option value="keys.htm?fundamental=261.6255653&right=2&upright=7&size=50&rotation=343.897886248&instrument=rhodes&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Wicki-Hayden.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Wicki-Hayden%20layout%2C%20originally%20devised%20for%20the%20bandoneon%20and%20concertina%20(free-reed%20aerophones%20of%20the%20harmonica%2Faccordion%20family).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Wicki-Hayden%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff%0Affffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff">Wicki-Hayden</option>
                     
-					<option value="keys.htm?fundamental=261.6255653&right=3&upright=2&size=50&rotation=343.897886248&instrument=sawtooth&enum=false&equivSteps=12&piano_colors=true&no_labels=false&scale=!%2012-ed2%20B-System%20Chromatic%20Button.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Chromatic%20Button%20System%20Type-B%20used%20on%20some%20button%20accordions.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20B-System%20Chromatic%20Button%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB">B-System Chromatic Button</option>
+					<option value="keys.htm?fundamental=261.6255653&right=3&upright=2&size=50&rotation=343.897886248&instrument=sawtooth&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20B-System%20Chromatic%20Button.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Chromatic%20Button%20System%20Type-B%20used%20on%20some%20button%20accordions.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20B-System%20Chromatic%20Button%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff">B-System Chromatic Button</option>
                     
-					<option value="keys.htm?fundamental=261.6255653&right=3&upright=1&size=50&rotation=343.897886248&instrument=sawtooth&enum=false&equivSteps=12&piano_colors=true&no_labels=false&scale=!%2012-ed2%20C-System%20Chromatic%20Button.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Chromatic%20Button%20System%20Type-C%20used%20on%20some%20button%20accordions.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20C-System%20Chromatic%20Button%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB">C-System Chromatic Button</option>
+					<option value="keys.htm?fundamental=261.6255653&right=3&upright=1&size=50&rotation=343.897886248&instrument=sawtooth&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20C-System%20Chromatic%20Button.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Chromatic%20Button%20System%20Type-C%20used%20on%20some%20button%20accordions.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20C-System%20Chromatic%20Button%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff">C-System Chromatic Button</option>
 				</optgroup>
                 
 				<optgroup label="Just Intonation">
-					<option value="keys.htm?fundamental=256&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&piano_colors=false&no_labels=false&scale=!%2012-JI-7L%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20Just%20Intonation%20classic%207-Limit%20scale%2C%20consisting%20of%2012%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%207%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-JI-7L%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A16%2F15%0A9%2F8%0A6%2F5%0A5%2F4%0A4%2F3%0A7%2F5%0A3%2F2%0A8%2F5%0A5%2F3%0A7%2F4%0A15%2F8%0A2%2F1&names=1%2F1%0A16%2F15%0A9%2F8%0A6%2F5%0A5%2F4%0A4%2F3%0A7%2F5%0A3%2F2%0A8%2F5%0A5%2F3%0A7%2F4%0A15%2F8">12-JI-7L Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
+					<option value="keys.htm?fundamental=256&right=1&upright=0&size=50&rotation=343.897886248&instrument=qanun&enum=false&equivSteps=7&spectrum_colors=false&no_labels=false&scale=!%207-JI%20Rast%20Maqam%20%28Arabic%29%20%E2%80%94%20%20Eight%20Echos%20%28Fourth%20Plagal%2C%20Byzantine%29%20Bosanquet%20Wilson%20Terpstra.scl%0A!%207-tone%20Arabic%20Rast%20Maqam%20made%20from%20two%20disjunct%20Rast%20tetrachords%20according%20to%20Mansour%20Zalzal%E2%80%99s%20famous%20lute%20tuning%20as%20described%20by%20al-Farabi%2C%20where%20the%20ratios%20including%20prime%20number%2011%20are%20alterations%20of%203-Limit%20versions%2C%20coinciding%20with%20the%20Eight%20Echos%20or%20Fourth%20Plagal%20of%20Byzantine%20Psaltic%20Chant%20described%20misleadingly%20in%20text%20books%20as%2012-10-8-12-12-10-8%20using%20the%2072%20moria%20system%20of%20approximation%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20|%207-JI%20Rast%20Maqam%20%2F%20Eight%20Echos%20%E2%80%94%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A7%0A!%0A9%2F8%0A27%2F22%0A4%2F3%0A3%2F2%0A27%2F16%0A81%2F44%0A2%2F1&names=1%2F1%0A9%2F8%0A27%2F22%0A4%2F3%0A3%2F2%0A27%2F16%0A81%2F44&note_colors=ffffff%0Affc37d%0Aff9fb7%0Af7ffaf%0Af7ffaf%0Affc37d%0Aff9fb7">7-JI Rast Maqam / Eight Echos — Bosanquet / Wilson / Terpstra</option>
+
+					<option value="keys.htm?fundamental=256&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&spectrum_colors=false&no_labels=false&scale=!%2012-JI-7L%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20Just%20Intonation%20classic%207-Limit%20scale%2C%20consisting%20of%2012%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%207%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-JI-7L%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A16%2F15%0A9%2F8%0A6%2F5%0A5%2F4%0A4%2F3%0A7%2F5%0A3%2F2%0A8%2F5%0A5%2F3%0A7%2F4%0A15%2F8%0A2%2F1&names=1%2F1%0A16%2F15%0A9%2F8%0A6%2F5%0A5%2F4%0A4%2F3%0A7%2F5%0A3%2F2%0A8%2F5%0A5%2F3%0A7%2F4%0A15%2F8&note_colors=55d455%0A55f4aa%0A55ffff%0A55b4ff%0A5555ea%0Aaa55ff%0Aff55ff%0Aff55aa%0Af45555%0Affaa55%0Affff55%0Aaaf455">12-JI-7L Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
+
+					<option value="keys.htm?fundamental=256&right=3&upright=2&size=50&rotation=343.897886248&instrument=qanun&enum=false&equivSteps=17&spectrum_colors=false&no_labels=false&scale=!%2017-JI-5L-Arabic-theoretical%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2017-tone%20Arabic%20theoretical%20scale%3A%205-Limit%20Just%20Intonation%20which%20is%20schismatic%20equivalent%20to%20a%2017-tone%203-Limit%20scale%20generated%20from%2012%20steps%20descending%20and%204%20ascending%20plus%20the%20fundamental%2C%20consisting%20of%2017%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%205%2C%20presumably%20used%20until%20the%208th%20century%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20|%2017-JI-5L-Arabic-theoretical%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A17%0A!%0A256%2F243%0A10%2F9%0A9%2F8%0A32%2F27%0A5%2F4%0A81%2F64%0A4%2F3%0A45%2F32%0A40%2F27%0A3%2F2%0A128%2F81%0A5%2F3%0A27%2F16%0A16%2F9%0A15%2F8%0A160%2F81%0A2%2F1&names=1%2F1%0A256%2F243%0A10%2F9%0A9%2F8%0A32%2F27%0A5%2F4%0A81%2F64%0A4%2F3%0A45%2F32%0A40%2F27%0A3%2F2%0A128%2F81%0A5%2F3%0A27%2F16%0A16%2F9%0A15%2F8%0A160%2F81&note_colors=f7ffaf%0A8fc7ef%0Aff9fb7%0Af7ffaf%0A8fc7ef%0Af7ffaf%0Aff9fb7%0Af7ffaf%0A8fc7ef%0Aff9fb7%0Af7ffaf%0A8fc7ef%0Af7ffaf%0Aff9fb7%0A8fc7ef%0Af7ffaf%0Aff9fb7">17-JI-5L-Arabic-theoretical Bosanquet / Wilson / Terpstra</option>
+
+					<option value="keys.htm?fundamental=256&right=3&upright=2&size=50&rotation=343.897886248&instrument=harp&enum=false&equivSteps=17&spectrum_colors=false&no_labels=false&scale=!%2017-JI-11L-Wilson%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2017-tone%20Just%20Intonation%2011-Limit%20scale%20by%20Erv%20Wilson%2C%20consisting%20of%2017%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%2011%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%20Fokblock(%5B64%2F63%2C%2056%2F55%2C%20968%2F945%2C%2036%2F35%5D%2C%20%5B5%2C%206%2C%2011%2C%206%5D)%20%3D%20%0A!%20Fokblock(%5B64%2F63%2C%2056%2F55%2C%2036%2F35%2C%20704%2F675%5D%2C%20%5B5%2C%203%2C%206%2C%2011%5D)%20%3D%0A!%20Fokblock(%5B64%2F63%2C%20968%2F945%2C%2036%2F35%2C%20704%2F675%5D%2C%20%5B5%2C%2013%2C%206%2C%206%5D)%20wakalix%0ATerpstra%20Keyboard%20WebApp%20%7C%2017-JI-11L-Wilson%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A17%0A!%0A22%2F21%0A11%2F10%0A9%2F8%0A7%2F6%0A11%2F9%0A5%2F4%0A4%2F3%0A11%2F8%0A22%2F15%0A3%2F2%0A11%2F7%0A44%2F27%0A5%2F3%0A7%2F4%0A11%2F6%0A15%2F8%0A2%2F1&names=R%0A22%2F21%0A11%2F10%0A9%2F8%0A7%2F6%0A11%2F9%0A5%2F4%0A4%2F3%0A11%2F8%0A22%2F15%0A3%2F2%0A11%2F7%0A44%2F27%0A5%2F3%0A7%2F4%0A11%2F6%0A15%2F8&note_colors=8fc7ef%0Af7ffaf%0Affc37d%0A8fc7ef%0Af7ffaf%0Affc37d%0A8fc7ef%0A8fc7ef%0Affc37d%0Affc37d%0A8fc7ef%0Af7ffaf%0Affc37d%0A8fc7ef%0Af7ffaf%0Affc37d%0A8fc7ef">17-JI-11L-Wilson Bosanquet / Wilson / Terpstra</option>
                     
-					<option value="keys.htm?fundamental=256&right=3&upright=2&size=50&rotation=343.897886248&instrument=harp&enum=false&equivSteps=17&piano_colors=false&no_labels=false&scale=!%2017-JI-11L-Wilson%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2017-tone%20Just%20Intonation%2011-Limit%20scale%20by%20Erv%20Wilson%2C%20consisting%20of%2017%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%2011%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%20Fokblock(%5B64%2F63%2C%2056%2F55%2C%20968%2F945%2C%2036%2F35%5D%2C%20%5B5%2C%206%2C%2011%2C%206%5D)%20%3D%20%0A!%20Fokblock(%5B64%2F63%2C%2056%2F55%2C%2036%2F35%2C%20704%2F675%5D%2C%20%5B5%2C%203%2C%206%2C%2011%5D)%20%3D%0A!%20Fokblock(%5B64%2F63%2C%20968%2F945%2C%2036%2F35%2C%20704%2F675%5D%2C%20%5B5%2C%2013%2C%206%2C%206%5D)%20wakalix%0ATerpstra%20Keyboard%20WebApp%20%7C%2017-JI-11L-Wilson%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A17%0A!%0A22%2F21%0A11%2F10%0A9%2F8%0A7%2F6%0A11%2F9%0A5%2F4%0A4%2F3%0A11%2F8%0A22%2F15%0A3%2F2%0A11%2F7%0A44%2F27%0A5%2F3%0A7%2F4%0A11%2F6%0A15%2F8%0A2%2F1&names=R%0A22%2F21%0A11%2F10%0A9%2F8%0A7%2F6%0A11%2F9%0A5%2F4%0A4%2F3%0A11%2F8%0A22%2F15%0A3%2F2%0A11%2F7%0A44%2F27%0A5%2F3%0A7%2F4%0A11%2F6%0A15%2F8">17-JI-11L-Wilson Bosanquet / Wilson / Terpstra</option>
+					<option value="keys.htm?fundamental=272.2044155&right=4&upright=3&size=50&rotation=343.897886248&instrument=qanun&enum=false&equivSteps=22&spectrum_colors=false&no_labels=false&scale=!%2022-JI-5L-Indian%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2022-tone%20Indian%20scale%3A%205-Limit%20Just%20Intonation%20which%20is%20schismatic%20equivalent%20to%20a%2022-tone%203-Limit%20scale%20generated%20from%2011%20steps%20ascending%20and%2010%20descending%20plus%20the%20fundamental%2C%20consisting%20of%2022%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%205%2C%20notated%20after%20Alain%20Dani%C3%A9lou%2C%20having%20as%20reference%20frequency%20the%20Earth%27s%20year%20transposed%2033%20octaves%20higher%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20|%2022-JI-5L-Indian%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A22%0A!%0A256%2F243%0A16%2F15%0A10%2F9%0A9%2F8%0A32%2F27%0A6%2F5%0A5%2F4%0A81%2F64%0A4%2F3%0A27%2F20%0A45%2F32%0A64%2F45%0A3%2F2%0A128%2F81%0A8%2F5%0A5%2F3%0A27%2F16%0A16%2F9%0A9%2F5%0A15%2F8%0A243%2F128%0A2%2F1&names=Sa%0AReL-%0AReL%2B%0ARe-%0ARe%0AGaL%0AGab%0AGa%0AGa%2B%0AMa%0AMa%2B%0AMaL-%0AMaL%2B%0APa%0ADhaL%0ADhab%0ADha%0ADha%2B%0ANiL%2B%0ANib%0ANi%0ANi%2B&note_colors=80df80%0A80cfff%0Affbfff%0Affcf80%0A80df80%0A80cfff%0Affbfff%0A80df80%0Affcf80%0A80df80%0Affcf80%0A80cfff%0Affbfff%0A80df80%0A80cfff%0Affbfff%0Affcf80%0A80df80%0A80cfff%0Affbfff%0A80df80%0Affcf80">22-JI-5L-Indian Bosanquet / Wilson / Terpstra</option>
                     
-					<option value="keys.htm?fundamental=264&right=5&upright=2&size=50&rotation=343.897886248&instrument=organ&enum=false&equivSteps=31&piano_colors=false&no_labels=false&scale=!%2031-JI-7L-Fokker%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2031-tone%20Just%20Intonation%207-Limit%20scale%20by%20Adriaan%20Fokker%2C%20consisting%20of%2031%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%207%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2031-JI-7L-Fokker%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A31%0A!%0A64%2F63%0A135%2F128%0A15%2F14%0A35%2F32%0A9%2F8%0A8%2F7%0A7%2F6%0A135%2F112%0A315%2F256%0A5%2F4%0A9%2F7%0A21%2F16%0A4%2F3%0A175%2F128%0A45%2F32%0A10%2F7%0A35%2F24%0A3%2F2%0A32%2F21%0A14%2F9%0A45%2F28%0A105%2F64%0A5%2F3%0A12%2F7%0A7%2F4%0A16%2F9%0A945%2F512%0A15%2F8%0A40%2F21%0A63%2F32%0A2%2F1&names=1%2F1%0A64%2F63%0A135%2F128%0A15%2F14%0A35%2F32%0A9%2F8%0A8%2F7%0A7%2F6%0A135%2F112%0A315%2F256%0A5%2F4%0A9%2F7%0A21%2F16%0A4%2F3%0A175%2F128%0A45%2F32%0A10%2F7%0A35%2F24%0A3%2F2%0A32%2F21%0A14%2F9%0A45%2F28%0A105%2F64%0A5%2F3%0A12%2F7%0A7%2F4%0A16%2F9%0A945%2F512%0A15%2F8%0A40%2F21%0A63%2F32">31-JI-7L-Fokker Bosanquet / Wilson / Terpstra</option>
+					<option value="keys.htm?fundamental=264&right=5&upright=2&size=50&rotation=343.897886248&instrument=organ&enum=false&equivSteps=31&spectrum_colors=false&no_labels=false&scale=!%2031-JI-7L-Fokker%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2031-tone%20Just%20Intonation%207-Limit%20scale%20by%20Adriaan%20Fokker%2C%20consisting%20of%2031%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20from%20the%20harmonic%20series%20up%20to%20a%20prime%20limit%20of%207%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2031-JI-7L-Fokker%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A31%0A!%0A64%2F63%0A135%2F128%0A15%2F14%0A35%2F32%0A9%2F8%0A8%2F7%0A7%2F6%0A135%2F112%0A315%2F256%0A5%2F4%0A9%2F7%0A21%2F16%0A4%2F3%0A175%2F128%0A45%2F32%0A10%2F7%0A35%2F24%0A3%2F2%0A32%2F21%0A14%2F9%0A45%2F28%0A105%2F64%0A5%2F3%0A12%2F7%0A7%2F4%0A16%2F9%0A945%2F512%0A15%2F8%0A40%2F21%0A63%2F32%0A2%2F1&names=1%2F1%0A64%2F63%0A135%2F128%0A15%2F14%0A35%2F32%0A9%2F8%0A8%2F7%0A7%2F6%0A135%2F112%0A315%2F256%0A5%2F4%0A9%2F7%0A21%2F16%0A4%2F3%0A175%2F128%0A45%2F32%0A10%2F7%0A35%2F24%0A3%2F2%0A32%2F21%0A14%2F9%0A45%2F28%0A105%2F64%0A5%2F3%0A12%2F7%0A7%2F4%0A16%2F9%0A945%2F512%0A15%2F8%0A40%2F21%0A63%2F32&note_colors=ffffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Abbaa93%0Acfcfcf%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Abbaa93%0Acfcfcf%0Affffff">31-JI-7L-Fokker Bosanquet / Wilson / Terpstra</option>
+                    <option value="keys.htm?fundamental=260.74074074&right=7&upright=3&size=50&rotation=343.897886248&instrument=gayageum&enum=false&equivSteps=43&spectrum_colors=true&fundamental_color=55FF55&no_labels=false&scale=! 43-JI-11L-Partch Bosanquet Wilson Terpstra.scl%0A! 43-tone Just Intonation 11-Limit scale by Harry Partch%2C consisting of 43 rational divisions per frequency halving%2Fdoubling with sonic distances derived symmetrically from both ascending and descending harmonic series (otonalities and utonalities) up to a prime limit of 11%2C mapped on a Bosanquet %2F Wilson %2F Terpstra layout.%0A!%0ATerpstra Keyboard WebApp | 43-JI-11L-Partch Bosanquet %2F Wilson %2F Terpstra%0A43%0A!%0A81%2F80%0A33%2F32%0A21%2F20%0A16%2F15%0A12%2F11%0A11%2F10%0A10%2F9%0A9%2F8%0A8%2F7%0A7%2F6%0A32%2F27%0A6%2F5%0A11%2F9%0A5%2F4%0A14%2F11%0A9%2F7%0A21%2F16%0A4%2F3%0A27%2F20%0A11%2F8%0A7%2F5%0A10%2F7%0A16%2F11%0A40%2F27%0A3%2F2%0A32%2F21%0A14%2F9%0A11%2F7%0A8%2F5%0A18%2F11%0A5%2F3%0A27%2F16%0A12%2F7%0A7%2F4%0A16%2F9%0A9%2F5%0A20%2F11%0A11%2F6%0A15%2F8%0A40%2F21%0A64%2F33%0A160%2F81%0A2%2F1&names=1%2F1%0A81%2F80%0A33%2F32%0A21%2F20%0A16%2F15%0A12%2F11%0A11%2F10%0A10%2F9%0A9%2F8%0A8%2F7%0A7%2F6%0A32%2F27%0A6%2F5%0A11%2F9%0A5%2F4%0A14%2F11%0A9%2F7%0A21%2F16%0A4%2F3%0A27%2F20%0A11%2F8%0A7%2F5%0A10%2F7%0A16%2F11%0A40%2F27%0A3%2F2%0A32%2F21%0A14%2F9%0A11%2F7%0A8%2F5%0A18%2F11%0A5%2F3%0A27%2F16%0A12%2F7%0A7%2F4%0A16%2F9%0A9%2F5%0A20%2F11%0A11%2F6%0A15%2F8%0A40%2F21%0A64%2F33%0A160%2F81&note_colors=">43-JI-11L-Partch Bosanquet / Wilson / Terpstra</option>
+					<option value="keys.htm?fundamental=256&right=9&upright=5&size=50&rotation=343.897886248&instrument=qanun&enum=false&equivSteps=53&spectrum_colors=false&no_labels=false&scale=!%2053-RI-3L%20Bosanquet%20Wilson%20Terpstra%20Male%20(Western).scl%0A!%2053-tone%20Rational%20Intonation%203-Limit%20scale%2C%20consisting%20of%2053%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20solely%20from%20the%20harmonics%202%20and%203%20of%20both%20ascending%20and%20descending%20harmonic%20series%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Male%20(Western)%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2053-RI-3L%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Male%20(Western)%0A53%0A!%0A531441%2F524288%0A282429536481%2F274877906944%0A134217728%2F129140163%0A256%2F243%0A2187%2F2048%0A1162261467%2F1073741824%0A34359738368%2F31381059609%0A65536%2F59049%0A9%2F8%0A4782969%2F4194304%0A2541865828329%2F2199023255552%0A16777216%2F14348907%0A32%2F27%0A19683%2F16384%0A10460353203%2F8589934592%0A4294967296%2F3486784401%0A8192%2F6561%0A81%2F64%0A43046721%2F33554432%0A1099511627776%2F847288609443%0A2097152%2F1594323%0A4%2F3%0A177147%2F131072%0A94143178827%2F68719476736%0A536870912%2F387420489%0A1024%2F729%0A729%2F512%0A387420489%2F268435456%0A137438953472%2F94143178827%0A262144%2F177147%0A3%2F2%0A1594323%2F1048576%0A847288609443%2F549755813888%0A67108864%2F43046721%0A128%2F81%0A6561%2F4096%0A3486784401%2F2147483648%0A17179869184%2F10460353203%0A32768%2F19683%0A27%2F16%0A14348907%2F8388608%0A4398046511104%2F2541865828329%0A8388608%2F4782969%0A16%2F9%0A59049%2F32768%0A31381059609%2F17179869184%0A2147483648%2F1162261467%0A4096%2F2187%0A243%2F128%0A129140163%2F67108864%0A549755813888%2F282429536481%0A1048576%2F531441%0A2%2F1&names=2%E2%81%B0%7C3%E2%81%B0%0A2%C2%B9%E2%81%B9%7C3%C2%B9%C2%B2%0A2%C2%B3%E2%81%B8%7C3%C2%B2%E2%81%B4%0A3%C2%B9%E2%81%B7%7C2%C2%B2%E2%81%B7%0A3%E2%81%B5%7C2%E2%81%B8%0A2%C2%B9%C2%B9%7C3%E2%81%B7%0A2%C2%B3%E2%81%B0%7C3%C2%B9%E2%81%B9%0A3%C2%B2%C2%B2%7C2%C2%B3%E2%81%B5%0A3%C2%B9%E2%81%B0%7C2%C2%B9%E2%81%B6%0A2%C2%B3%7C3%C2%B2%0A2%C2%B2%C2%B2%7C3%C2%B9%E2%81%B4%0A2%E2%81%B4%C2%B9%7C3%C2%B2%E2%81%B6%0A3%C2%B9%E2%81%B5%7C2%C2%B2%E2%81%B4%0A3%C2%B3%7C2%E2%81%B5%0A2%C2%B9%E2%81%B4%7C3%E2%81%B9%0A2%C2%B3%C2%B3%7C3%C2%B2%C2%B9%0A3%C2%B2%E2%81%B0%7C2%C2%B3%C2%B2%0A3%E2%81%B8%7C2%C2%B9%C2%B3%0A2%E2%81%B6%7C3%E2%81%B4%0A2%C2%B2%E2%81%B5%7C3%C2%B9%E2%81%B6%0A3%C2%B2%E2%81%B5%7C2%E2%81%B4%E2%81%B0%0A3%C2%B9%C2%B3%7C2%C2%B2%C2%B9%0A3%C2%B9%7C2%C2%B2%0A2%C2%B9%E2%81%B7%7C3%C2%B9%C2%B9%0A2%C2%B3%E2%81%B6%7C3%C2%B2%C2%B3%0A3%C2%B9%E2%81%B8%7C2%C2%B2%E2%81%B9%0A3%E2%81%B6%7C2%C2%B9%E2%81%B0%0A2%E2%81%B9%7C3%E2%81%B6%0A2%C2%B2%E2%81%B8%7C3%C2%B9%E2%81%B8%0A3%C2%B2%C2%B3%7C2%C2%B3%E2%81%B7%0A3%C2%B9%C2%B9%7C2%C2%B9%E2%81%B8%0A2%C2%B9%7C3%C2%B9%0A2%C2%B2%E2%81%B0%7C3%C2%B9%C2%B3%0A2%C2%B3%E2%81%B9%7C3%C2%B2%E2%81%B5%0A3%C2%B9%E2%81%B6%7C2%C2%B2%E2%81%B6%0A3%E2%81%B4%7C2%E2%81%B7%0A2%C2%B9%C2%B2%7C3%E2%81%B8%0A2%C2%B3%C2%B9%7C3%C2%B2%E2%81%B0%0A3%C2%B2%C2%B9%7C2%C2%B3%E2%81%B4%0A3%E2%81%B9%7C2%C2%B9%E2%81%B5%0A2%E2%81%B4%7C3%C2%B3%0A2%C2%B2%C2%B3%7C3%C2%B9%E2%81%B5%0A3%C2%B2%E2%81%B6%7C2%E2%81%B4%C2%B2%0A3%C2%B9%E2%81%B4%7C2%C2%B2%C2%B3%0A3%C2%B2%7C2%E2%81%B4%0A2%C2%B9%E2%81%B5%7C3%C2%B9%E2%81%B0%0A2%C2%B3%E2%81%B4%7C3%C2%B2%C2%B2%0A3%C2%B9%E2%81%B9%7C2%C2%B3%C2%B9%0A3%E2%81%B7%7C2%C2%B9%C2%B2%0A2%E2%81%B7%7C3%E2%81%B5%0A2%C2%B2%E2%81%B6%7C3%C2%B9%E2%81%B7%0A3%C2%B2%E2%81%B4%7C2%C2%B3%E2%81%B9%0A3%C2%B9%C2%B2%7C2%C2%B2%E2%81%B0%0A3%E2%81%B0%7C2%C2%B9&note_colors=ffffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0Aabb7c3">53-RI-3L Bosanquet / Wilson / Terpstra Male (Western)</option>
                     
-					<option value="keys.htm?fundamental=260.74074074&right=7&upright=3&size=50&rotation=343.897886248&instrument=gayageum&enum=false&equivSteps=43&piano_colors=false&no_labels=false&scale=!%2043-JI-11L-Partch%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2043-tone%20Just%20Intonation%2011-Limit%20scale%20by%20Harry%20Partch%2C%20consisting%20of%2043%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20symmetrically%20from%20both%20ascending%20and%20descending%20harmonic%20series%20(otonalities%20and%20utonalities)%20up%20to%20a%20prime%20limit%20of%2011%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2043-JI-11L-Partch%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A43%0A!%0A81%2F80%0A33%2F32%0A21%2F20%0A16%2F15%0A12%2F11%0A11%2F10%0A10%2F9%0A9%2F8%0A8%2F7%0A7%2F6%0A32%2F27%0A6%2F5%0A11%2F9%0A5%2F4%0A14%2F11%0A9%2F7%0A21%2F16%0A4%2F3%0A27%2F20%0A11%2F8%0A7%2F5%0A10%2F7%0A16%2F11%0A40%2F27%0A3%2F2%0A32%2F21%0A14%2F9%0A11%2F7%0A8%2F5%0A18%2F11%0A5%2F3%0A27%2F16%0A12%2F7%0A7%2F4%0A16%2F9%0A9%2F5%0A20%2F11%0A11%2F6%0A15%2F8%0A40%2F21%0A64%2F33%0A160%2F81%0A2%2F1&names=1%2F1%0A81%2F80%0A33%2F32%0A21%2F20%0A16%2F15%0A12%2F11%0A11%2F10%0A10%2F9%0A9%2F8%0A8%2F7%0A7%2F6%0A32%2F27%0A6%2F5%0A11%2F9%0A5%2F4%0A14%2F11%0A9%2F7%0A21%2F16%0A4%2F3%0A27%2F20%0A11%2F8%0A7%2F5%0A10%2F7%0A16%2F11%0A40%2F27%0A3%2F2%0A32%2F21%0A14%2F9%0A11%2F7%0A8%2F5%0A18%2F11%0A5%2F3%0A27%2F16%0A12%2F7%0A7%2F4%0A16%2F9%0A9%2F5%0A20%2F11%0A11%2F6%0A15%2F8%0A40%2F21%0A64%2F33%0A160%2F81">43-JI-11L-Partch Bosanquet / Wilson / Terpstra</option>
-                    
-					<option value="keys.htm?fundamental=256&right=9&upright=5&size=50&rotation=343.897886248&instrument=qanun&enum=false&equivSteps=53&piano_colors=false&no_labels=false&scale=!%2053-RI-3L%20Bosanquet%20Wilson%20Terpstra%20Male%20(Western).scl%0A!%2053-tone%20Rational%20Intonation%203-Limit%20scale%2C%20consisting%20of%2053%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20solely%20from%20the%20harmonics%202%20and%203%20of%20both%20ascending%20and%20descending%20harmonic%20series%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Male%20(Western)%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2053-RI-3L%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Male%20(Western)%0A53%0A!%0A531441%2F524288%0A282429536481%2F274877906944%0A134217728%2F129140163%0A256%2F243%0A2187%2F2048%0A1162261467%2F1073741824%0A34359738368%2F31381059609%0A65536%2F59049%0A9%2F8%0A4782969%2F4194304%0A2541865828329%2F2199023255552%0A16777216%2F14348907%0A32%2F27%0A19683%2F16384%0A10460353203%2F8589934592%0A4294967296%2F3486784401%0A8192%2F6561%0A81%2F64%0A43046721%2F33554432%0A1099511627776%2F847288609443%0A2097152%2F1594323%0A4%2F3%0A177147%2F131072%0A94143178827%2F68719476736%0A536870912%2F387420489%0A1024%2F729%0A729%2F512%0A387420489%2F268435456%0A137438953472%2F94143178827%0A262144%2F177147%0A3%2F2%0A1594323%2F1048576%0A847288609443%2F549755813888%0A67108864%2F43046721%0A128%2F81%0A6561%2F4096%0A3486784401%2F2147483648%0A17179869184%2F10460353203%0A32768%2F19683%0A27%2F16%0A14348907%2F8388608%0A4398046511104%2F2541865828329%0A8388608%2F4782969%0A16%2F9%0A59049%2F32768%0A31381059609%2F17179869184%0A2147483648%2F1162261467%0A4096%2F2187%0A243%2F128%0A129140163%2F67108864%0A549755813888%2F282429536481%0A1048576%2F531441%0A2%2F1&names=2%E2%81%B0%7C3%E2%81%B0%0A2%C2%B9%E2%81%B9%7C3%C2%B9%C2%B2%0A2%C2%B3%E2%81%B8%7C3%C2%B2%E2%81%B4%0A3%C2%B9%E2%81%B7%7C2%C2%B2%E2%81%B7%0A3%E2%81%B5%7C2%E2%81%B8%0A2%C2%B9%C2%B9%7C3%E2%81%B7%0A2%C2%B3%E2%81%B0%7C3%C2%B9%E2%81%B9%0A3%C2%B2%C2%B2%7C2%C2%B3%E2%81%B5%0A3%C2%B9%E2%81%B0%7C2%C2%B9%E2%81%B6%0A2%C2%B3%7C3%C2%B2%0A2%C2%B2%C2%B2%7C3%C2%B9%E2%81%B4%0A2%E2%81%B4%C2%B9%7C3%C2%B2%E2%81%B6%0A3%C2%B9%E2%81%B5%7C2%C2%B2%E2%81%B4%0A3%C2%B3%7C2%E2%81%B5%0A2%C2%B9%E2%81%B4%7C3%E2%81%B9%0A2%C2%B3%C2%B3%7C3%C2%B2%C2%B9%0A3%C2%B2%E2%81%B0%7C2%C2%B3%C2%B2%0A3%E2%81%B8%7C2%C2%B9%C2%B3%0A2%E2%81%B6%7C3%E2%81%B4%0A2%C2%B2%E2%81%B5%7C3%C2%B9%E2%81%B6%0A3%C2%B2%E2%81%B5%7C2%E2%81%B4%E2%81%B0%0A3%C2%B9%C2%B3%7C2%C2%B2%C2%B9%0A3%C2%B9%7C2%C2%B2%0A2%C2%B9%E2%81%B7%7C3%C2%B9%C2%B9%0A2%C2%B3%E2%81%B6%7C3%C2%B2%C2%B3%0A3%C2%B9%E2%81%B8%7C2%C2%B2%E2%81%B9%0A3%E2%81%B6%7C2%C2%B9%E2%81%B0%0A2%E2%81%B9%7C3%E2%81%B6%0A2%C2%B2%E2%81%B8%7C3%C2%B9%E2%81%B8%0A3%C2%B2%C2%B3%7C2%C2%B3%E2%81%B7%0A3%C2%B9%C2%B9%7C2%C2%B9%E2%81%B8%0A2%C2%B9%7C3%C2%B9%0A2%C2%B2%E2%81%B0%7C3%C2%B9%C2%B3%0A2%C2%B3%E2%81%B9%7C3%C2%B2%E2%81%B5%0A3%C2%B9%E2%81%B6%7C2%C2%B2%E2%81%B6%0A3%E2%81%B4%7C2%E2%81%B7%0A2%C2%B9%C2%B2%7C3%E2%81%B8%0A2%C2%B3%C2%B9%7C3%C2%B2%E2%81%B0%0A3%C2%B2%C2%B9%7C2%C2%B3%E2%81%B4%0A3%E2%81%B9%7C2%C2%B9%E2%81%B5%0A2%E2%81%B4%7C3%C2%B3%0A2%C2%B2%C2%B3%7C3%C2%B9%E2%81%B5%0A3%C2%B2%E2%81%B6%7C2%E2%81%B4%C2%B2%0A3%C2%B9%E2%81%B4%7C2%C2%B2%C2%B3%0A3%C2%B2%7C2%E2%81%B4%0A2%C2%B9%E2%81%B5%7C3%C2%B9%E2%81%B0%0A2%C2%B3%E2%81%B4%7C3%C2%B2%C2%B2%0A3%C2%B9%E2%81%B9%7C2%C2%B3%C2%B9%0A3%E2%81%B7%7C2%C2%B9%C2%B2%0A2%E2%81%B7%7C3%E2%81%B5%0A2%C2%B2%E2%81%B6%7C3%C2%B9%E2%81%B7%0A3%C2%B2%E2%81%B4%7C2%C2%B3%E2%81%B9%0A3%C2%B9%C2%B2%7C2%C2%B2%E2%81%B0%0A3%E2%81%B0%7C2%C2%B9">53-RI-3L Bosanquet / Wilson / Terpstra Male (Western)</option>
-                    
-					<option value="keys.htm?fundamental=256&right=9&upright=4&size=50&rotation=16.102113751&instrument=qanun&enum=false&equivSteps=53&piano_colors=false&no_labels=false&scale=!%2053-RI-3L%20Bosanquet%20Wilson%20Terpstra%20Female%20(Eastern).scl%0A!%2053-tone%20Rational%20Intonation%203-Limit%20scale%2C%20consisting%20of%2053%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20solely%20from%20the%20harmonics%202%20and%203%20of%20both%20ascending%20and%20descending%20harmonic%20series%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Female%20(Eastern)%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2053-RI-3L%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Female%20(Eastern)%0A53%0A!%0A531441%2F524288%0A282429536481%2F274877906944%0A134217728%2F129140163%0A256%2F243%0A2187%2F2048%0A1162261467%2F1073741824%0A34359738368%2F31381059609%0A65536%2F59049%0A9%2F8%0A4782969%2F4194304%0A2541865828329%2F2199023255552%0A16777216%2F14348907%0A32%2F27%0A19683%2F16384%0A10460353203%2F8589934592%0A4294967296%2F3486784401%0A8192%2F6561%0A81%2F64%0A43046721%2F33554432%0A1099511627776%2F847288609443%0A2097152%2F1594323%0A4%2F3%0A177147%2F131072%0A94143178827%2F68719476736%0A536870912%2F387420489%0A1024%2F729%0A729%2F512%0A387420489%2F268435456%0A137438953472%2F94143178827%0A262144%2F177147%0A3%2F2%0A1594323%2F1048576%0A847288609443%2F549755813888%0A67108864%2F43046721%0A128%2F81%0A6561%2F4096%0A3486784401%2F2147483648%0A17179869184%2F10460353203%0A32768%2F19683%0A27%2F16%0A14348907%2F8388608%0A4398046511104%2F2541865828329%0A8388608%2F4782969%0A16%2F9%0A59049%2F32768%0A31381059609%2F17179869184%0A2147483648%2F1162261467%0A4096%2F2187%0A243%2F128%0A129140163%2F67108864%0A549755813888%2F282429536481%0A1048576%2F531441%0A2%2F1&names=2%E2%81%B0%7C3%E2%81%B0%0A2%C2%B9%E2%81%B9%7C3%C2%B9%C2%B2%0A2%C2%B3%E2%81%B8%7C3%C2%B2%E2%81%B4%0A3%C2%B9%E2%81%B7%7C2%C2%B2%E2%81%B7%0A3%E2%81%B5%7C2%E2%81%B8%0A2%C2%B9%C2%B9%7C3%E2%81%B7%0A2%C2%B3%E2%81%B0%7C3%C2%B9%E2%81%B9%0A3%C2%B2%C2%B2%7C2%C2%B3%E2%81%B5%0A3%C2%B9%E2%81%B0%7C2%C2%B9%E2%81%B6%0A2%C2%B3%7C3%C2%B2%0A2%C2%B2%C2%B2%7C3%C2%B9%E2%81%B4%0A2%E2%81%B4%C2%B9%7C3%C2%B2%E2%81%B6%0A3%C2%B9%E2%81%B5%7C2%C2%B2%E2%81%B4%0A3%C2%B3%7C2%E2%81%B5%0A2%C2%B9%E2%81%B4%7C3%E2%81%B9%0A2%C2%B3%C2%B3%7C3%C2%B2%C2%B9%0A3%C2%B2%E2%81%B0%7C2%C2%B3%C2%B2%0A3%E2%81%B8%7C2%C2%B9%C2%B3%0A2%E2%81%B6%7C3%E2%81%B4%0A2%C2%B2%E2%81%B5%7C3%C2%B9%E2%81%B6%0A3%C2%B2%E2%81%B5%7C2%E2%81%B4%E2%81%B0%0A3%C2%B9%C2%B3%7C2%C2%B2%C2%B9%0A3%C2%B9%7C2%C2%B2%0A2%C2%B9%E2%81%B7%7C3%C2%B9%C2%B9%0A2%C2%B3%E2%81%B6%7C3%C2%B2%C2%B3%0A3%C2%B9%E2%81%B8%7C2%C2%B2%E2%81%B9%0A3%E2%81%B6%7C2%C2%B9%E2%81%B0%0A2%E2%81%B9%7C3%E2%81%B6%0A2%C2%B2%E2%81%B8%7C3%C2%B9%E2%81%B8%0A3%C2%B2%C2%B3%7C2%C2%B3%E2%81%B7%0A3%C2%B9%C2%B9%7C2%C2%B9%E2%81%B8%0A2%C2%B9%7C3%C2%B9%0A2%C2%B2%E2%81%B0%7C3%C2%B9%C2%B3%0A2%C2%B3%E2%81%B9%7C3%C2%B2%E2%81%B5%0A3%C2%B9%E2%81%B6%7C2%C2%B2%E2%81%B6%0A3%E2%81%B4%7C2%E2%81%B7%0A2%C2%B9%C2%B2%7C3%E2%81%B8%0A2%C2%B3%C2%B9%7C3%C2%B2%E2%81%B0%0A3%C2%B2%C2%B9%7C2%C2%B3%E2%81%B4%0A3%E2%81%B9%7C2%C2%B9%E2%81%B5%0A2%E2%81%B4%7C3%C2%B3%0A2%C2%B2%C2%B3%7C3%C2%B9%E2%81%B5%0A3%C2%B2%E2%81%B6%7C2%E2%81%B4%C2%B2%0A3%C2%B9%E2%81%B4%7C2%C2%B2%C2%B3%0A3%C2%B2%7C2%E2%81%B4%0A2%C2%B9%E2%81%B5%7C3%C2%B9%E2%81%B0%0A2%C2%B3%E2%81%B4%7C3%C2%B2%C2%B2%0A3%C2%B9%E2%81%B9%7C2%C2%B3%C2%B9%0A3%E2%81%B7%7C2%C2%B9%C2%B2%0A2%E2%81%B7%7C3%E2%81%B5%0A2%C2%B2%E2%81%B6%7C3%C2%B9%E2%81%B7%0A3%C2%B2%E2%81%B4%7C2%C2%B3%E2%81%B9%0A3%C2%B9%C2%B2%7C2%C2%B2%E2%81%B0%0A3%E2%81%B0%7C2%C2%B9">53-RI-3L Bosanquet / Wilson / Terpstra Female (Eastern)</option>
+					<option value="keys.htm?fundamental=256&right=9&upright=4&size=50&rotation=16.102113751&instrument=qanun&enum=false&equivSteps=53&spectrum_colors=false&no_labels=false&scale=!%2053-RI-3L%20Bosanquet%20Wilson%20Terpstra%20Female%20(Eastern).scl%0A!%2053-tone%20Rational%20Intonation%203-Limit%20scale%2C%20consisting%20of%2053%20rational%20divisions%20per%20frequency%20halving%2Fdoubling%20with%20sonic%20distances%20derived%20solely%20from%20the%20harmonics%202%20and%203%20of%20both%20ascending%20and%20descending%20harmonic%20series%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Female%20(Eastern)%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2053-RI-3L%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20Female%20(Eastern)%0A53%0A!%0A531441%2F524288%0A282429536481%2F274877906944%0A134217728%2F129140163%0A256%2F243%0A2187%2F2048%0A1162261467%2F1073741824%0A34359738368%2F31381059609%0A65536%2F59049%0A9%2F8%0A4782969%2F4194304%0A2541865828329%2F2199023255552%0A16777216%2F14348907%0A32%2F27%0A19683%2F16384%0A10460353203%2F8589934592%0A4294967296%2F3486784401%0A8192%2F6561%0A81%2F64%0A43046721%2F33554432%0A1099511627776%2F847288609443%0A2097152%2F1594323%0A4%2F3%0A177147%2F131072%0A94143178827%2F68719476736%0A536870912%2F387420489%0A1024%2F729%0A729%2F512%0A387420489%2F268435456%0A137438953472%2F94143178827%0A262144%2F177147%0A3%2F2%0A1594323%2F1048576%0A847288609443%2F549755813888%0A67108864%2F43046721%0A128%2F81%0A6561%2F4096%0A3486784401%2F2147483648%0A17179869184%2F10460353203%0A32768%2F19683%0A27%2F16%0A14348907%2F8388608%0A4398046511104%2F2541865828329%0A8388608%2F4782969%0A16%2F9%0A59049%2F32768%0A31381059609%2F17179869184%0A2147483648%2F1162261467%0A4096%2F2187%0A243%2F128%0A129140163%2F67108864%0A549755813888%2F282429536481%0A1048576%2F531441%0A2%2F1&names=2%E2%81%B0%7C3%E2%81%B0%0A2%C2%B9%E2%81%B9%7C3%C2%B9%C2%B2%0A2%C2%B3%E2%81%B8%7C3%C2%B2%E2%81%B4%0A3%C2%B9%E2%81%B7%7C2%C2%B2%E2%81%B7%0A3%E2%81%B5%7C2%E2%81%B8%0A2%C2%B9%C2%B9%7C3%E2%81%B7%0A2%C2%B3%E2%81%B0%7C3%C2%B9%E2%81%B9%0A3%C2%B2%C2%B2%7C2%C2%B3%E2%81%B5%0A3%C2%B9%E2%81%B0%7C2%C2%B9%E2%81%B6%0A2%C2%B3%7C3%C2%B2%0A2%C2%B2%C2%B2%7C3%C2%B9%E2%81%B4%0A2%E2%81%B4%C2%B9%7C3%C2%B2%E2%81%B6%0A3%C2%B9%E2%81%B5%7C2%C2%B2%E2%81%B4%0A3%C2%B3%7C2%E2%81%B5%0A2%C2%B9%E2%81%B4%7C3%E2%81%B9%0A2%C2%B3%C2%B3%7C3%C2%B2%C2%B9%0A3%C2%B2%E2%81%B0%7C2%C2%B3%C2%B2%0A3%E2%81%B8%7C2%C2%B9%C2%B3%0A2%E2%81%B6%7C3%E2%81%B4%0A2%C2%B2%E2%81%B5%7C3%C2%B9%E2%81%B6%0A3%C2%B2%E2%81%B5%7C2%E2%81%B4%E2%81%B0%0A3%C2%B9%C2%B3%7C2%C2%B2%C2%B9%0A3%C2%B9%7C2%C2%B2%0A2%C2%B9%E2%81%B7%7C3%C2%B9%C2%B9%0A2%C2%B3%E2%81%B6%7C3%C2%B2%C2%B3%0A3%C2%B9%E2%81%B8%7C2%C2%B2%E2%81%B9%0A3%E2%81%B6%7C2%C2%B9%E2%81%B0%0A2%E2%81%B9%7C3%E2%81%B6%0A2%C2%B2%E2%81%B8%7C3%C2%B9%E2%81%B8%0A3%C2%B2%C2%B3%7C2%C2%B3%E2%81%B7%0A3%C2%B9%C2%B9%7C2%C2%B9%E2%81%B8%0A2%C2%B9%7C3%C2%B9%0A2%C2%B2%E2%81%B0%7C3%C2%B9%C2%B3%0A2%C2%B3%E2%81%B9%7C3%C2%B2%E2%81%B5%0A3%C2%B9%E2%81%B6%7C2%C2%B2%E2%81%B6%0A3%E2%81%B4%7C2%E2%81%B7%0A2%C2%B9%C2%B2%7C3%E2%81%B8%0A2%C2%B3%C2%B9%7C3%C2%B2%E2%81%B0%0A3%C2%B2%C2%B9%7C2%C2%B3%E2%81%B4%0A3%E2%81%B9%7C2%C2%B9%E2%81%B5%0A2%E2%81%B4%7C3%C2%B3%0A2%C2%B2%C2%B3%7C3%C2%B9%E2%81%B5%0A3%C2%B2%E2%81%B6%7C2%E2%81%B4%C2%B2%0A3%C2%B9%E2%81%B4%7C2%C2%B2%C2%B3%0A3%C2%B2%7C2%E2%81%B4%0A2%C2%B9%E2%81%B5%7C3%C2%B9%E2%81%B0%0A2%C2%B3%E2%81%B4%7C3%C2%B2%C2%B2%0A3%C2%B9%E2%81%B9%7C2%C2%B3%C2%B9%0A3%E2%81%B7%7C2%C2%B9%C2%B2%0A2%E2%81%B7%7C3%E2%81%B5%0A2%C2%B2%E2%81%B6%7C3%C2%B9%E2%81%B7%0A3%C2%B2%E2%81%B4%7C2%C2%B3%E2%81%B9%0A3%C2%B9%C2%B2%7C2%C2%B2%E2%81%B0%0A3%E2%81%B0%7C2%C2%B9&note_colors=ffffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0A878787%0Aff9f40%0A878787%0Aff9f40%0Ae7e7e7%0Aabb7c3%0Affffff%0Ac3b7ab%0Ae7e7e7%0Aabb7c3">53-RI-3L Bosanquet / Wilson / Terpstra Female (Eastern)</option>
 				</optgroup>
 
 				<optgroup label="Equal Temperaments">
-					<option value="keys.htm?fundamental=254.5642522&right=3&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=19&piano_colors=false&no_labels=false&scale=!%2019-ed2%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2019-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2019-ed2%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A19%0A!%0A63.15789%0A126.31579%0A189.47368%0A252.63158%0A315.78947%0A378.94737%0A442.10526%0A505.26316%0A568.42105%0A631.57895%0A694.73684%0A757.89474%0A821.05263%0A884.21053%0A947.36842%0A1010.52632%0A1073.68421%0A1136.84211%0A1200.00000&names=C%0AC%E2%99%AF%0AD%E2%99%AD%0AD%0AD%E2%99%AF%0AE%E2%99%AD%0AE%0AE%E2%99%AF%2FF%E2%99%AD%0AF%0AF%E2%99%AF%0AG%E2%99%AD%0AG%0AG%E2%99%AF%0AA%E2%99%AD%0AA%0AA%E2%99%AF%0AB%E2%99%AD%0AB%0AB%E2%99%AF%2FC%E2%99%AD">19-ed2 Bosanquet / Wilson / Terpstra</option>
+					<option value="keys.htm?fundamental=254.5642522&right=3&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=19&spectrum_colors=false&no_labels=false&scale=!%2019-ed2%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2019-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2019-ed2%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A19%0A!%0A63.15789%0A126.31579%0A189.47368%0A252.63158%0A315.78947%0A378.94737%0A442.10526%0A505.26316%0A568.42105%0A631.57895%0A694.73684%0A757.89474%0A821.05263%0A884.21053%0A947.36842%0A1010.52632%0A1073.68421%0A1136.84211%0A1200.00000&names=C%0AC%E2%99%AF%0AD%E2%99%AD%0AD%0AD%E2%99%AF%0AE%E2%99%AD%0AE%0AE%E2%99%AF%2FF%E2%99%AD%0AF%0AF%E2%99%AF%0AG%E2%99%AD%0AG%0AG%E2%99%AF%0AA%E2%99%AD%0AA%0AA%E2%99%AF%0AB%E2%99%AD%0AB%0AB%E2%99%AF%2FC%E2%99%AD&note_colors=ffffff%0A7fbfd4%0Aff9f40%0Affffff%0A7fbfd4%0Aff9f40%0Affffff%0Abfaf8a%0Affffff%0A7fbfd4%0Aff9f40%0Affffff%0A7fbfd4%0Aff9f40%0Affffff%0A7fbfd4%0Aff9f40%0Affffff%0Abfaf8a">19-ed2 Bosanquet / Wilson / Terpstra</option>
                     
-					<option value="keys.htm?fundamental=263.09212&right=5&upright=2&size=50&rotation=343.897886248&instrument=organ&enum=false&equivSteps=31&piano_colors=false&no_labels=false&scale=!%2031-ed2%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2031-tone%20equal%20tempered%20scale%20consisting%20of%2031%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%20in%20standard%20meantone%20notation%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2031-ed2%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A31%0A!%0A38.70968%0A77.41935%0A116.12903%0A154.83871%0A193.54839%0A232.25806%0A270.96774%0A309.67742%0A348.38710%0A387.09677%0A425.80645%0A464.51613%0A503.22581%0A541.93548%0A580.64516%0A619.35484%0A658.06452%0A696.77419%0A735.48387%0A774.19355%0A812.90323%0A851.61290%0A890.32258%0A929.03226%0A967.74194%0A1006.45161%0A1045.16129%0A1083.87097%0A1122.58065%0A1161.29032%0A1200.00000&names=C%0AD%E2%99%AD%E2%99%AD%0AC%E2%99%AF%0AD%E2%99%AD%0AC%C3%97%0AD%0AE%E2%99%AD%E2%99%AD%0AD%E2%99%AF%0AE%E2%99%AD%0AD%C3%97%0AE%0AF%E2%99%AD%0AE%E2%99%AF%0AF%0AG%E2%99%AD%E2%99%AD%0AF%E2%99%AF%0AG%E2%99%AD%0AF%C3%97%0AG%0AA%E2%99%AD%E2%99%AD%0AG%E2%99%AF%0AA%E2%99%AD%0AG%C3%97%0AA%0AB%E2%99%AD%E2%99%AD%0AA%E2%99%AF%0AB%E2%99%AD%0AA%C3%97%0AB%0AC%E2%99%AD%0AB%E2%99%AF">31-ed2 Bosanquet / Wilson / Terpstra</option>
+					<option value="keys.htm?fundamental=260.5221364&right=7&upright=4&size=50&rotation=343.897886248&instrument=harp&enum=true&equivSteps=41&spectrum_colors=false&no_labels=false&scale=!%2041-ed2%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2041-tone%20equal%20tempered%20scale%20consisting%20of%2041%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20|%2041-ed2%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A41%0A!%0A29.26829%0A58.53659%0A87.80488%0A117.07317%0A146.34146%0A175.60976%0A204.87805%0A234.14634%0A263.41463%0A292.68293%0A321.95122%0A351.21951%0A380.48780%0A409.75610%0A439.02439%0A468.29268%0A497.56098%0A526.82927%0A556.09756%0A585.36585%0A614.63415%0A643.90244%0A673.17073%0A702.43902%0A731.70732%0A760.97561%0A790.24390%0A819.51220%0A848.78049%0A878.04878%0A907.31707%0A936.58537%0A965.85366%0A995.12195%0A1024.39024%0A1053.65854%0A1082.92683%0A1112.19512%0A1141.46341%0A1170.73171%0A1200.00000&names=0%2F41%0A1%0A2%0A3%0A4%0A5%0A6%0A7%0A8%0A9%0A10%0A11%0A12%0A13%0A14%0A15%0A16%0A17%0A18%0A19%0A20%0A21%0A22%0A23%0A24%0A25%0A26%0A27%0A28%0A29%0A30%0A31%0A32%0A33%0A34%0A35%0A36%0A37%0A38%0A39%0A40&note_colors=ffffff%0Ac3b7ab%0A878787%0Aff9f40%0A878787%0Aff9f40%0Aabb7c3%0Affffff%0Ac3b7ab%0A878787%0Aff9f40%0A878787%0Aff9f40%0Aabb7c3%0Affffff%0Ac3b7ab%0Aabb7c3%0Affffff%0Ac3b7ab%0A878787%0Aff9f40%0A878787%0Aff9f40%0Aabb7c3%0Affffff%0Ac3b7ab%0A878787%0Aff9f40%0A878787%0Aff9f40%0Aabb7c3%0Affffff%0Ac3b7ab%0A878787%0Aff9f40%0A878787%0Aff9f40%0Aabb7c3%0Affffff%0Ac3b7ab%0Aabb7c3">41-ed2 Bosanquet / Wilson / Terpstra</option>
+                    
+					<option value="keys.htm?fundamental=263.09212&right=5&upright=2&size=50&rotation=343.897886248&instrument=organ&enum=false&equivSteps=31&spectrum_colors=false&no_labels=false&scale=!%2031-ed2%20Bosanquet%20Wilson%20Terpstra.scl%0A!%2031-tone%20equal%20tempered%20scale%20consisting%20of%2031%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%20in%20standard%20meantone%20notation%2C%20mapped%20on%20a%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%20layout.%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2031-ed2%20Bosanquet%20%2F%20Wilson%20%2F%20Terpstra%0A31%0A!%0A38.70968%0A77.41935%0A116.12903%0A154.83871%0A193.54839%0A232.25806%0A270.96774%0A309.67742%0A348.38710%0A387.09677%0A425.80645%0A464.51613%0A503.22581%0A541.93548%0A580.64516%0A619.35484%0A658.06452%0A696.77419%0A735.48387%0A774.19355%0A812.90323%0A851.61290%0A890.32258%0A929.03226%0A967.74194%0A1006.45161%0A1045.16129%0A1083.87097%0A1122.58065%0A1161.29032%0A1200.00000&names=C%0AD%E2%99%AD%E2%99%AD%0AC%E2%99%AF%0AD%E2%99%AD%0AC%C3%97%0AD%0AE%E2%99%AD%E2%99%AD%0AD%E2%99%AF%0AE%E2%99%AD%0AD%C3%97%0AE%0AF%E2%99%AD%0AE%E2%99%AF%0AF%0AG%E2%99%AD%E2%99%AD%0AF%E2%99%AF%0AG%E2%99%AD%0AF%C3%97%0AG%0AA%E2%99%AD%E2%99%AD%0AG%E2%99%AF%0AA%E2%99%AD%0AG%C3%97%0AA%0AB%E2%99%AD%E2%99%AD%0AA%E2%99%AF%0AB%E2%99%AD%0AA%C3%97%0AB%0AC%E2%99%AD%0AB%E2%99%AF&note_colors=ffffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Abbaa93%0Acfcfcf%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Aff9f41%0Acfcfcf%0Abbaa93%0A7b7b7b%0Affffff%0Abbaa93%0Acfcfcf%0Affffff">31-ed2 Bosanquet / Wilson / Terpstra</option>
 				</optgroup>
 
 			</select>
@@ -102,27 +72,27 @@
 					<div class="one-half column">
 
 						<label>Fundamental (Hz)</label>
-						<input id="fundamental" step="any" min="20" max="20000" value="261.6255653" onchange="changeURL()" type="number">
+						<input id="fundamental" type="number" step="any" min="20" max="20000" value="256" onchange="changeURL()">
 			
 						<label>Right Facing Steps</label>
-						<input id="rSteps" min="-1220" max="1220" value="3" onchange="changeURL()" type="number">  
+						<input id="rSteps" type="number" min="-1220" max="1220" value="4" onchange="changeURL()">  
 				
 						<label>Up/Right Facing Steps</label>
-						<input id="urSteps" min="-1220" max="1220" value="10" onchange="changeURL()" type="number">   
+						<input id="urSteps" type="number" min="-1220" max="1220" value="7" onchange="changeURL()">   
 					</div>
 					<div class="one-half column">
 						<label>Hex Size (pixels)</label>
-						<input id="hexSize" step="any" min="20" max="1000" value="50" onchange="changeURL()" type="number"><br>  
+						<input id="hexSize" type="number" step="any" min="20" max="1000" value="50" onchange="changeURL()"><br>  
 			
 						<label>Rotation (degrees)</label>
-						<input id="rotation" step="any" min="0" max="360" value="343.897886248" onchange="changeURL()" type="number"><br>  
+						<input id="rotation" type="number" step="any" min="0" max="360" value="343.897886248" onchange="changeURL()"><br>  
 			
 						<label>Instrument</label>
 						<select id="instrument" onchange="changeURL()">
 							<option value="piano">Piano</option>
 							<option value="harpsichord">Harpsichord</option>
 							<option value="rhodes">Rhodes</option>
-							<option selected="selected" value="harp">Harp</option>
+							<option value="harp">Harp</option>
 							<option value="choir">Choir</option>
 							<option value="strings">Strings</option>
 							<option value="sawtooth">Sawtooth</option>
@@ -130,7 +100,7 @@
 							<option value="qanun">Qanun</option>
 							<option value="organ">Organ</option>
 							<option value="organleslie">Organ + Leslie</option>
-							<option value="5Lstudy">5-Limit Study Tone</option>
+                            <option value="5Lstudy">5-Limit Study Tone</option>
 						</select>
 					</div>
 				</div>
@@ -140,25 +110,25 @@
 					</div>
 					<div class="one-half column">
 						<label>
-							<input id="enum" name="number_or_name" value="fnord" onchange="hideRevealNames()" type="checkbox">
+							<input id="enum" type="checkbox" name="number_or_name" value="fnord" onchange="hideRevealNames()">
 							<span class="label-body">Enumerate Scale</span>
 						</label>
 
 						<label>
-							<input id="piano_colors" name="piano_colors" onchange="hideRevealNames()" type="checkbox">
-							<span class="label-body">Piano Colors (only 12-tone C-Major layouts)</span>
+    						<input id="spectrum_colors" type="checkbox" name="spectrum_colors" value="fnord" onchange="hideRevealColors()">
+							<span class="label-body">Use Spectrum Colors</span>
 						</label>
 
 						<label>
-							<input id="no_labels" name="no_labels" onchange="hideRevealNames()" type="checkbox">
-							<span class="label-body">Blank Keys (no labels)</span>
+							<input id="no_labels" type="checkbox" name="no_labels" value="fnord" onchange="hideRevealEnum()">
+							<span class="label-body">Blank Keys (No labels)</span>
 						</label>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="one-half column">
-						<label>Scale (scala format)</label>
+					<div class="one-half column pushrow-mobile">
+						<label>Scale (Scala format)</label>
 						<textarea id="scale" onchange="changeURL()" class="iosscrollable u-full-width" rows="12">! 31-ed2 Bosanquet Wilson Terpstra.scl
 ! 31-tone equal tempered scale consisting of 31 sonically equal divisions per frequency halving/doubling in standard meantone notation, mapped on a Bosanquet / Wilson / Terpstra layout.
 !
@@ -197,12 +167,14 @@ Terpstra Keyboard WebApp | 31-ed2 Bosanquet / Wilson / Terpstra
 1161.29032
 1200.00000</textarea>
 				</div>
-				<div class="one-half column">
-					<label id="numberLabel" style="display: none;">Steps To Equivalence Interval</label>
-					<input id="equivSteps" min="1" max="200" value="" onchange="changeURL()" style="display: none;" type="number">
+
+<div class="one-half column thincol-parent">
+				 <div class="u-half-width rpad"> 
+					<label id="numberLabel" style="display: block;">Steps To Equivalence Interval</label>
+					<input id="equivSteps" type="number" min="1" max="200" value="" onchange="changeURL()" style="display: block;" class="u-full-width">
 			
-					<label id="namesLabel" style="display: block;">Note Names</label>
-					<textarea id="names" onchange="changeURL()" class="iosscrollable u-full-width" rows="12" style="display: block;">C
+					<label id="namesLabel" style="display: none;">Note Names</label>
+					<textarea id="names" onchange="changeURL()" class="iosscrollable u-full-width" rows="12" style="display: none;">C
 D♭♭
 C♯
 D♭
@@ -234,23 +206,56 @@ B
 C♭
 B♯</textarea>
 					</div>
-				</div>
+
+
+	
+<div class="u-half-width">
+	<label id="fundamental_colorLabel" style="display: none;">Fundamental Color</label>
+	<!-- <input type="text" class="jscolor" value="#65e936"> -->
+	<input type="text" id="fundamental_color" style="display: none;" class="jscolor u-full-width" value="#55ff55">
+
+	<label id="note_colorsLabel">Color Layout</label>
+	<textarea id="note_colors" onchange="changeURL()" class="iosscrollable u-full-width" rows="12">ffffff
+ff9f41
+cfcfcf
+bbaa93
+7b7b7b
+ffffff
+ff9f41
+cfcfcf
+bbaa93
+7b7b7b
+ffffff
+bbaa93
+cfcfcf
+ffffff
+ff9f41
+cfcfcf
+bbaa93
+7b7b7b
+ffffff
+ff9f41
+cfcfcf
+bbaa93
+7b7b7b
+ffffff
+ff9f41
+cfcfcf
+bbaa93
+7b7b7b
+ffffff
+bbaa93
+cfcfcf
+ffffff</textarea>
+
+</div>
+</div>
+
+</div>
 				<br>
-				<input name="Submit" value="Make me a microtonal keyboard!" type="submit">
-			</form></div>
-		
-        <div id="donate" class="container">
-			<div id="donateText">
-				Killer Lick Tax
-			</div>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHLwYJKoZIhvcNAQcEoIIHIDCCBxwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCZrH++8wLh1VmO1q8TMjLn3TSI0lgkAWFVYC4WYnFYIQYaTt/bH+Nh6nEBp4Y/590KrLljJUSPSFCbUffgmU5e2gbGTxQYwBGfFBCXRetuF/HhrcnUYrOgi/oZD6o7omP9a3Y31/7HES6bQ5zzoX2COOkDFyiq/rOXabbx6n7frTELMAkGBSsOAwIaBQAwgawGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIq+wMqn3khAeAgYi0+yyzQjNU4dS3iqCfryoVkR6bLPSGEqem9DMXM919UwmidOxpH5eolxCrdPJfRBaVEg/haP4f4VQ8ls5oatMD1MnjQJKUaPCcVbEvtvb3UA18UC8srnqddtqcpbmDR59dKqXJ3eBHP0aMwXQpp856HBQeWU2hqB5UHIiiUBPlFKUXENojjKTToIIDhzCCA4MwggLsoAMCAQICAQAwDQYJKoZIhvcNAQEFBQAwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMB4XDTA0MDIxMzEwMTMxNVoXDTM1MDIxMzEwMTMxNVowgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBR07d/ETMS1ycjtkpkvjXZe9k+6CieLuLsPumsJ7QC1odNz3sJiCbs2wC0nLE0uLGaEtXynIgRqIddYCHx88pb5HTXv4SZeuv0Rqq4+axW9PLAAATU8w04qqjaSXgbGLP3NmohqM6bV9kZZwZLR/klDaQGo1u9uDb9lr4Yn+rBQIDAQABo4HuMIHrMB0GA1UdDgQWBBSWn3y7xm8XvVk/UtcKG+wQ1mSUazCBuwYDVR0jBIGzMIGwgBSWn3y7xm8XvVk/UtcKG+wQ1mSUa6GBlKSBkTCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb22CAQAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCBXzpWmoBa5e9fo6ujionW1hUhPkOBakTr3YCDjbYfvJEiv/2P+IobhOGJr85+XHhN0v4gUkEDI8r2/rNk1m0GA8HKddvTjyGw/XqXa+LSTlDYkqI8OwR8GEYj4efEtcRpRYBxV8KxAW93YDWzFGvruKnnLbDAF6VR5w/cCMn5hzGCAZowggGWAgEBMIGUMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTUwMTIzMTQzMTE4WjAjBgkqhkiG9w0BCQQxFgQU+y49WZFVuin6VwQAWndyj1vctAcwDQYJKoZIhvcNAQEBBQAEgYAiKeTrR9mEQZgPrWLae1ZgAzgs7zKXT3SYSkBlg/z48FDrS1JhGJMg+ppjvpr2UzOLKLc677s3bo36cYvKKFyFzwQ5+XKnhFUYJX5PnPww3WPrzir8SH1FvxivSsEI4w2TzA9pmUWq+Bp95ck/3rUBDutZn+B1RgVMA06nI67DPA==-----END PKCS7-----
-">
-<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-</form>
-        		</div>
+				<input name="Submit" type="submit" value="Make me a microtonal keyboard!">
+</form></div>
+
         
 		<div class="container">
         Designed by <a href="http://siementerpstra.com/" target="new">Siemen Terpstra</a> in the late ’80’s. WebApp developed by <a href="http://jamesfenn.com/" target="new">James Fenn</a> with additions by <a href="http://brandlew.com/" target="new">Brandon Lewis</a> and <a href="http://whatmusicreallyis.com/" title="What Music Really İs" target="new">Bo Constantinsen</a>. Credits to Scott Thompson and <a href="http://ozanyarman.com/">Dr Ozan Yarman</a> for contributing samples.
@@ -273,10 +278,13 @@ B♯</textarea>
 		document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "organ";
 		document.getElementById("enum").checked = ("enum" in getData) ? JSON.parse(getData.enum) : false;
 		document.getElementById("equivSteps").value = ("equivSteps" in getData) ? getData.equivSteps : 31;
-		document.getElementById("piano_colors").checked = ("piano_colors" in getData) ? JSON.parse(getData.piano_colors) : false;
-		document.getElementById("no_labels").checked = ("no_labels" in getData) ? JSON.parse(getData.no_labels) : false;
-		
+		document.getElementById("no_labels").checked = ("no_labels" in getData) ? JSON.parse(getData.no_labels) : false;		
+		document.getElementById("spectrum_colors").checked = ("spectrum_colors" in getData) ? JSON.parse(getData.spectrum_colors) : false;		
+		document.getElementById("fundamental_color").value = ("fundamental_color" in getData) ? getData.fundamental_color : '#55ff55';
+
+
 		var global_pressed_interval;
+		var current_text_color= "#000000";
 
 		if ("scale" in getData) {
 			document.getElementById("scale").value = getData.scale[0];
@@ -285,8 +293,14 @@ B♯</textarea>
 		if ("names" in getData) {
 			document.getElementById("names").value = getData.names[0];
 		} 
+
+		if ("note_colors" in getData) {
+			document.getElementById("note_colors").value = getData.note_colors[0];
+		}
 		
 		hideRevealNames();
+		hideRevealColors();
+		hideRevealEnum();
 		
 		function hideRevealNames() {
 			if (document.getElementById("enum").checked) {
@@ -299,6 +313,50 @@ B♯</textarea>
 				document.getElementById("names").style.display = 'block';
 				document.getElementById("numberLabel").style.display = 'none';
 				document.getElementById("namesLabel").style.display = 'block';
+			}
+			changeURL();
+		}
+
+		function hideRevealColors() {
+    		if (document.getElementById("spectrum_colors").checked) {
+				document.getElementById("fundamental_color").style.display = 'block';
+				document.getElementById("fundamental_colorLabel").style.display = 'block';
+				document.getElementById("note_colors").style.display = 'none';
+                document.getElementById("note_colorsLabel").style.display = 'none';
+		
+			} else {
+				document.getElementById("fundamental_color").style.display = 'none';
+				document.getElementById("fundamental_colorLabel").style.display = 'none';
+				document.getElementById("note_colors").style.display = 'block';
+                document.getElementById("note_colorsLabel").style.display = 'block';
+			}
+
+			changeURL();
+
+		}
+
+		function hideRevealEnum(){
+			if(document.getElementById("no_labels").checked){
+				//document.getElementById("enum").checked=false;
+				document.getElementById("enum").disabled=true;
+				document.getElementById("equivSteps").style.display = 'none';
+				document.getElementById("names").style.display = 'none';
+				document.getElementById("numberLabel").style.display = 'none';
+				document.getElementById("namesLabel").style.display = 'none';
+			}
+			else
+			{
+				document.getElementById("enum").disabled=false;
+				if(!document.getElementById('enum').checked)
+				{
+					document.getElementById("namesLabel").style.display = 'block';
+					document.getElementById("names").style.display = 'block';
+				}
+				else
+				{
+					document.getElementById("equivSteps").style.display = 'block';
+					document.getElementById("numberLabel").style.display = 'block';
+				}
 			}
 			changeURL();
 		}
@@ -336,14 +394,18 @@ B♯</textarea>
 					+ "&instrument=" + document.getElementById("instrument").value
 					+ "&enum=" + document.getElementById("enum").checked
 					+ "&equivSteps=" + document.getElementById("equivSteps").value
-                    + "&piano_colors=" + document.getElementById("piano_colors").checked
+                    + "&spectrum_colors=" + document.getElementById("spectrum_colors").checked
+                    + "&fundamental_color=" + document.getElementById("fundamental_color").value
                     + "&no_labels=" + document.getElementById("no_labels").checked;
 			
 			url += "&scale=";	
 			url += encodeURIComponent(document.getElementById('scale').value);
 			
 			url += "&names=";
-			url += encodeURIComponent(document.getElementById('names').value);
+			url += encodeURIComponent(document.getElementById('names').value);			
+
+			url += "&note_colors=";
+			url += encodeURIComponent(document.getElementById('note_colors').value);
 			
 			// Find scl file description for the page title
 			
@@ -385,6 +447,15 @@ B♯</textarea>
 			});
 			settings.equivInterval = settings.scale.pop();
 			settings.scale.unshift(0);
+		}
+
+		function parseScaleColors()
+		{
+			settings.keycolors = new Array;
+			var colorsArray = document.getElementById('note_colors').value.split('\n');
+			colorsArray.forEach( function(line) {
+				settings.keycolors.push(line);
+			});
 		}
 				
 		function calculateRotationMatrix(rotation, center) {
@@ -471,6 +542,7 @@ B♯</textarea>
 			settings.hexSize = document.getElementById("hexSize").value;
 			settings.rotation = (document.getElementById("rotation").value * 2 * Math.PI) / 360;
 			parseScale();
+			parseScaleColors();
 			settings.names = document.getElementById('names').value.split('\n');
 			settings.enum = document.getElementById('enum').checked;
 			settings.equivSteps = parseInt(document.getElementById('equivSteps').value);
@@ -482,8 +554,9 @@ B♯</textarea>
 			settings.hexVert = settings.hexHeight * 3/4;
 			settings.hexWidth = Math.sqrt(3)/2 * settings.hexHeight;
 
-			settings.piano_colors = document.getElementById('piano_colors').checked;
 			settings.no_labels = document.getElementById('no_labels').checked;
+			settings.spectrum_colors = document.getElementById('spectrum_colors').checked;
+			settings.fundamental_color = document.getElementById('fundamental_color').value;
 			
 			// Set up resize handler
 			
@@ -526,8 +599,12 @@ B♯</textarea>
 			//settings.canvas.addEventListener("keydown", sustainOn, false); // Firefox isn't firing :(
 			//settings.canvas.addEventListener("keyup", sustainOff, false);
 			
-			window.addEventListener("keydown", sustainOn, true);
-			window.addEventListener("keyup", sustainOff, false);
+			if(typeof(shake_sustain) == 'undefined')
+			{
+				shake_sustain=1;
+				window.addEventListener("keydown", sustainOn, true);
+				window.addEventListener("keyup", sustainOff, false);
+			}
 
 			//iPad Shake to toggle sustain
 			if (typeof window.DeviceMotionEvent != 'undefined') 
@@ -805,8 +882,9 @@ B♯</textarea>
 			settings.context.rotate(-settings.rotation);
 			// hexcoords = p and screenCoords = hexCenter
 	
-			settings.context.fillStyle = "black";
-			settings.context.font = "24pt Arial";
+			//settings.context.fillStyle = "black"; //bdl_04062016
+			settings.context.fillStyle = getContrastYIQ(current_text_color);
+			settings.context.font = "22pt Arial";
 			settings.context.textAlign = "center";
 			settings.context.textBaseline = "middle";
 			
@@ -844,55 +922,59 @@ B♯</textarea>
 		}
 		
 		function centsToColor(cents, pressed) {
-			//console.log(global_pressed_interval);
-			is12=false;
-			if(settings.scale.length==12)
+			if(!settings.spectrum_colors)
 			{
-				is12=true;
-			}
-			if(settings.piano_colors && is12==true)
-			//if(0)
-			{
-				var r=0;
-				var g=0;
-				var b=0;
-				var light=255;
-				var dark=100;
-				var down_color = 90;
-				if(global_pressed_interval == 0)
+				
+				if(typeof(settings.keycolors[global_pressed_interval]) === 'undefined') 
 				{
-					//C
-					r = light;
-					g = light;
-					b = light;
+					var returnColor = "#EDEDE4";
 				}
-				else if(global_pressed_interval == 1){ r=dark; g=dark; b=dark; }//Db
-				else if(global_pressed_interval == 2){ r=light; g=light; b=light; }//D
-				else if(global_pressed_interval == 3){ r=dark; g=dark; b=dark; }//Eb
-				else if(global_pressed_interval == 4){ r=light; g=light; b=light; }//E
-				else if(global_pressed_interval == 5){ r=light; g=light; b=light; }//F
-				else if(global_pressed_interval == 6){ r=dark; g=dark; b=dark; }//Gb
-				else if(global_pressed_interval == 7){ r=light; g=light; b=light; }//G
-				else if(global_pressed_interval == 8){ r=dark; g=dark; b=dark; }//Ab
-				else if(global_pressed_interval == 9){ r=light; g=light; b=light; }//A
-				else if(global_pressed_interval == 10){ r=dark; g=dark; b=dark; }//Bb
-				else if(global_pressed_interval == 11){ r=light; g=light; b=light; }//B
+				else
+				{
+					var returnColor = settings.keycolors[global_pressed_interval];
+				}
+			
+				var oldColor = returnColor;
 
+				
+				//convert color name to hex
+				returnColor = nameToHex(returnColor);
+				
+				current_text_color = returnColor;
+				
+				//convert the hex to rgb
+				returnColor = hex2rgb(returnColor);
+
+				//darken for pressed key
 				if(pressed)
 				{
-					r-=90;
-					g-=90;
+					returnColor[0]-=90;
+					returnColor[1]-=90;
 				}
-				return rgb(r,g,b);
-
-
+				
+				return rgb(returnColor[0], returnColor[1], returnColor[2]);
+		
 			}
-			var h = 1/3; // green
+
+			var fcolor = hex2rgb("#" + settings.fundamental_color);
+			fcolor = rgb2hsv(fcolor[0], fcolor[1], fcolor[2]);
+
+			var h = fcolor.h/360;
+			var s = fcolor.s/100;
+			var v = fcolor.v/100;
+			//var h = 145/360; // green
 			var reduced = (cents / 1200) % 1;
 			if (reduced < 0) reduced += 1;
 			h = (reduced + h) % 1;
-			var v = (pressed) ? 0.5 : 1;
-			return HSVtoRGB(h, 0.7, v);
+
+			v = (pressed) ? v-(v/2) : v;
+			
+			returnColor = HSVtoRGB(h, s, v);
+
+			//setup text color
+			var tcolor = HSVtoRGB2(h,s,v);
+			current_text_color = rgbToHex(tcolor.red, tcolor.green, tcolor.blue);
+			return returnColor;
 		}
 		
 		function roundTowardZero(val) {
@@ -967,6 +1049,29 @@ B♯</textarea>
 				case 5: r = v, g = p, b = q; break;
 			}
 			return rgb(Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255));
+		}
+
+		function HSVtoRGB2(h, s, v) {
+			var r, g, b, i, f, p, q, t;
+			i = Math.floor(h * 6);
+			f = h * 6 - i;
+			p = v * (1 - s);
+			q = v * (1 - f * s);
+			t = v * (1 - (1 - f) * s);
+			switch (i % 6) {
+				case 0: r = v, g = t, b = p; break;
+				case 1: r = q, g = v, b = p; break;
+				case 2: r = p, g = v, b = t; break;
+				case 3: r = p, g = q, b = v; break;
+				case 4: r = t, g = p, b = v; break;
+				case 5: r = v, g = p, b = q; break;
+			}
+		
+			return {
+		        red: Math.floor(r * 255),
+		        green: Math.floor(g * 255),
+		        blue: Math.floor(b * 255)
+		    };
 		}
 
 		function ActiveHex(coords) {
@@ -1073,6 +1178,237 @@ function tempAlert(msg,duration)
 	 document.body.appendChild(el);
 }
 	
+
+function nameToHex(colour) {
+    var colours = {
+        "aliceblue": "#f0f8ff",
+        "antiquewhite": "#faebd7",
+        "aqua": "#00ffff",
+        "aquamarine": "#7fffd4",
+        "azure": "#f0ffff",
+        "beige": "#f5f5dc",
+        "bisque": "#ffe4c4",
+        "black": "#000000",
+        "blanchedalmond": "#ffebcd",
+        "blue": "#0000ff",
+        "blueviolet": "#8a2be2",
+        "brown": "#a52a2a",
+        "burlywood": "#deb887",
+        "cadetblue": "#5f9ea0",
+        "chartreuse": "#7fff00",
+        "chocolate": "#d2691e",
+        "coral": "#ff7f50",
+        "cornflowerblue": "#6495ed",
+        "cornsilk": "#fff8dc",
+        "crimson": "#dc143c",
+        "cyan": "#00ffff",
+        "darkblue": "#00008b",
+        "darkcyan": "#008b8b",
+        "darkgoldenrod": "#b8860b",
+        "darkgray": "#a9a9a9",
+        "darkgreen": "#006400",
+        "darkkhaki": "#bdb76b",
+        "darkmagenta": "#8b008b",
+        "darkolivegreen": "#556b2f",
+        "darkorange": "#ff8c00",
+        "darkorchid": "#9932cc",
+        "darkred": "#8b0000",
+        "darksalmon": "#e9967a",
+        "darkseagreen": "#8fbc8f",
+        "darkslateblue": "#483d8b",
+        "darkslategray": "#2f4f4f",
+        "darkturquoise": "#00ced1",
+        "darkviolet": "#9400d3",
+        "deeppink": "#ff1493",
+        "deepskyblue": "#00bfff",
+        "dimgray": "#696969",
+        "dodgerblue": "#1e90ff",
+        "firebrick": "#b22222",
+        "floralwhite": "#fffaf0",
+        "forestgreen": "#228b22",
+        "fuchsia": "#ff00ff",
+        "gainsboro": "#dcdcdc",
+        "ghostwhite": "#f8f8ff",
+        "gold": "#ffd700",
+        "goldenrod": "#daa520",
+        "gray": "#808080",
+        "green": "#008000",
+        "greenyellow": "#adff2f",
+        "honeydew": "#f0fff0",
+        "hotpink": "#ff69b4",
+        "indianred ": "#cd5c5c",
+        "indigo": "#4b0082",
+        "ivory": "#fffff0",
+        "khaki": "#f0e68c",
+        "lavender": "#e6e6fa",
+        "lavenderblush": "#fff0f5",
+        "lawngreen": "#7cfc00",
+        "lemonchiffon": "#fffacd",
+        "lightblue": "#add8e6",
+        "lightcoral": "#f08080",
+        "lightcyan": "#e0ffff",
+        "lightgoldenrodyellow": "#fafad2",
+        "lightgrey": "#d3d3d3",
+        "lightgreen": "#90ee90",
+        "lightpink": "#ffb6c1",
+        "lightsalmon": "#ffa07a",
+        "lightseagreen": "#20b2aa",
+        "lightskyblue": "#87cefa",
+        "lightslategray": "#778899",
+        "lightsteelblue": "#b0c4de",
+        "lightyellow": "#ffffe0",
+        "lime": "#00ff00",
+        "limegreen": "#32cd32",
+        "linen": "#faf0e6",
+        "magenta": "#ff00ff",
+        "maroon": "#800000",
+        "mediumaquamarine": "#66cdaa",
+        "mediumblue": "#0000cd",
+        "mediumorchid": "#ba55d3",
+        "mediumpurple": "#9370d8",
+        "mediumseagreen": "#3cb371",
+        "mediumslateblue": "#7b68ee",
+        "mediumspringgreen": "#00fa9a",
+        "mediumturquoise": "#48d1cc",
+        "mediumvioletred": "#c71585",
+        "midnightblue": "#191970",
+        "mintcream": "#f5fffa",
+        "mistyrose": "#ffe4e1",
+        "moccasin": "#ffe4b5",
+        "navajowhite": "#ffdead",
+        "navy": "#000080",
+        "oldlace": "#fdf5e6",
+        "olive": "#808000",
+        "olivedrab": "#6b8e23",
+        "orange": "#ffa500",
+        "orangered": "#ff4500",
+        "orchid": "#da70d6",
+        "palegoldenrod": "#eee8aa",
+        "palegreen": "#98fb98",
+        "paleturquoise": "#afeeee",
+        "palevioletred": "#d87093",
+        "papayawhip": "#ffefd5",
+        "peachpuff": "#ffdab9",
+        "peru": "#cd853f",
+        "pink": "#ffc0cb",
+        "plum": "#dda0dd",
+        "powderblue": "#b0e0e6",
+        "purple": "#800080",
+        "red": "#ff0000",
+        "rosybrown": "#bc8f8f",
+        "royalblue": "#4169e1",
+        "saddlebrown": "#8b4513",
+        "salmon": "#fa8072",
+        "sandybrown": "#f4a460",
+        "seagreen": "#2e8b57",
+        "seashell": "#fff5ee",
+        "sienna": "#a0522d",
+        "silver": "#c0c0c0",
+        "skyblue": "#87ceeb",
+        "slateblue": "#6a5acd",
+        "slategray": "#708090",
+        "snow": "#fffafa",
+        "springgreen": "#00ff7f",
+        "steelblue": "#4682b4",
+        "tan": "#d2b48c",
+        "teal": "#008080",
+        "thistle": "#d8bfd8",
+        "tomato": "#ff6347",
+        "turquoise": "#40e0d0",
+        "violet": "#ee82ee",
+        "wheat": "#f5deb3",
+        "white": "#ffffff",
+        "whitesmoke": "#f5f5f5",
+        "yellow": "#ffff00",
+        "yellowgreen": "#9acd32"
+    };
+
+    if (typeof colours[colour.toLowerCase()] != 'undefined') 
+	{
+		return colours[colour.toLowerCase()];
+	}
+	else if(colour.indexOf("#") ==0)
+	{
+		return colour;
+	}
+	else if(colour.length==6 && colour.indexOf("#") ==-1)
+	{
+		return "#"+colour;
+	}
+    	
+
+    return "#EDEDE4"; //default button color!
+
+}
+
+function hex2rgb(col) {
+    var r, g, b;
+    if (col.charAt(0) == '#') {
+        col = col.substr(1);
+    }
+    r = col.charAt(0) + col.charAt(1);
+    g = col.charAt(2) + col.charAt(3);
+    b = col.charAt(4) + col.charAt(5);
+    r = parseInt(r, 16);
+    g = parseInt(g, 16);
+    b = parseInt(b, 16);
+    return [r, g, b]
+}
+
+function rgb2hsv (r1,g1,b1) {
+    var rr, gg, bb,
+        r = arguments[0] / 255,
+        g = arguments[1] / 255,
+        b = arguments[2] / 255,
+        h, s,
+        v = Math.max(r, g, b),
+        diff = v - Math.min(r, g, b),
+        diffc = function(c){
+            return (v - c) / 6 / diff + 1 / 2;
+        };
+
+    if (diff == 0) {
+        h = s = 0;
+    } else {
+        s = diff / v;
+        rr = diffc(r);
+        gg = diffc(g);
+        bb = diffc(b);
+
+        if (r === v) {
+            h = bb - gg;
+        }else if (g === v) {
+            h = (1 / 3) + rr - bb;
+        }else if (b === v) {
+            h = (2 / 3) + gg - rr;
+        }
+        if (h < 0) {
+            h += 1;
+        }else if (h > 1) {
+            h -= 1;
+        }
+    }
+    return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        v: Math.round(v * 100)
+    };
+}
+
+function getContrastYIQ(hexcolor){
+    hexcolor = hexcolor.replace("#", "");
+	var r = parseInt(hexcolor.substr(0,2),16);
+	var g = parseInt(hexcolor.substr(2,2),16);
+	var b = parseInt(hexcolor.substr(4,2),16);
+	var yiq = ((r*299)+(g*587)+(b*114))/1000;
+	return (yiq >= 128) ? 'black' : 'white';
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+
 	</script>
 
 </body></html>
