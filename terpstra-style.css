@@ -37,13 +37,13 @@ body {
 }
 
 .u-half-width {
-  width: 47%;
+  width: 47.5%;
   box-sizing: border-box; 
   float: left;
 }
 
 .rpad{
-    margin-right: 10px;
+    margin-right: 5%;
 }
 
 select#quicklinks {

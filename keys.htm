@@ -24,8 +24,16 @@
 		<div class="container">
 			<h1>Edit Settings</h1>
 
-			<select id="quicklinks" onchange="javascript:location.href = this.value;">
-				<option selected="selected" disabled="disabled">Tuning\Layout Quick Links</option>
+
+			<form id="settingsForm">
+				<div class="row">
+					<div class="one-half column thincol-parent">
+						<div class="u-half-width rpad"> 
+                        
+			<label>Tuning\Layout Quick Links</label>
+            <select id="quicklinks" onchange="javascript:location.href = this.value;" class="u-full-width">
+						<!--
+				<option selected="selected" disabled="disabled">Tuning\Layout Quick Links</option>-->
 				<optgroup label="Isomorphic Layouts for 12-ET">
 					<option value="keys.htm?fundamental=261.6255653&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff">Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
 					
@@ -66,29 +74,34 @@
 
 			</select>
 
-
-			<form id="settingsForm">
-				<div class="row">
-					<div class="one-half column">
-
 						<label>Fundamental (Hz)</label>
-						<input id="fundamental" type="number" step="any" min="20" max="20000" value="256" onchange="changeURL()">
+						<input id="fundamental" type="number" step="any" min="20" max="20000" value="256" onchange="changeURL()" class="u-full-width">
+       </div>
 			
+            <div class="u-half-width">
+            
 						<label>Right Facing Steps</label>
-						<input id="rSteps" type="number" min="-1220" max="1220" value="4" onchange="changeURL()">  
+						<input id="rSteps" type="number" min="-1220" max="1220" value="4" onchange="changeURL()" class="u-full-width">  
 				
 						<label>Up/Right Facing Steps</label>
-						<input id="urSteps" type="number" min="-1220" max="1220" value="7" onchange="changeURL()">   
+						<input id="urSteps" type="number" min="-1220" max="1220" value="7" onchange="changeURL()" class="u-full-width">   
 					</div>
-					<div class="one-half column">
+		</div>
+        
+					<div class="one-half column thincol-parent">
+						<div class="u-half-width rpad"> 
+                    
 						<label>Hex Size (pixels)</label>
-						<input id="hexSize" type="number" step="any" min="20" max="1000" value="50" onchange="changeURL()"><br>  
+						<input id="hexSize" type="number" step="any" min="20" max="1000" value="50" onchange="changeURL()" class="u-full-width"> 
 			
 						<label>Rotation (degrees)</label>
-						<input id="rotation" type="number" step="any" min="0" max="360" value="343.897886248" onchange="changeURL()"><br>  
+						<input id="rotation" type="number" step="any" min="0" max="360" value="343.897886248" onchange="changeURL()" class="u-full-width">  
+					</div>
+                    
+            <div class="u-half-width">
 			
 						<label>Instrument</label>
-						<select id="instrument" onchange="changeURL()">
+						<select id="instrument" onchange="changeURL()"  class="u-full-width">
 							<option value="piano">Piano</option>
 							<option value="harpsichord">Harpsichord</option>
 							<option value="rhodes">Rhodes</option>
@@ -102,13 +115,7 @@
 							<option value="organleslie">Organ + Leslie</option>
                             <option value="5Lstudy">5-Limit Study Tone</option>
 						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="one-half column">
-						<img src="1x1.png">
-					</div>
-					<div class="one-half column">
+
 						<label>
 							<input id="enum" type="checkbox" name="number_or_name" value="fnord" onchange="hideRevealNames()">
 							<span class="label-body">Enumerate Scale</span>
@@ -123,8 +130,13 @@
 							<input id="no_labels" type="checkbox" name="no_labels" value="fnord" onchange="hideRevealEnum()">
 							<span class="label-body">Blank Keys (No labels)</span>
 						</label>
+				</div>
 					</div>
 				</div>
+                
+					<div class="row">
+						<img src="1x1.png" style="margin: 1.5%">
+					</div>
 
 				<div class="row">
 					<div class="one-half column pushrow-mobile">
