@@ -3,6 +3,10 @@ body {
     padding: 0;
     background-color: #000000;
     color: white;*/
+	background-image: url(Pattern3D_06.png);
+	background-repeat: repeat;
+	background-position: top left;
+	background-attachment: fixed;
 }
 #fullscreen-setter {
     background: black;
@@ -70,22 +74,3 @@ select#quicklinks {
         padding: 0 10px;
     }
 }
-
-/*textarea {
-    //font-family: cursive;
-    color: #777;
-    background: #D8F7EE; 
-    box-shadow: 0px 3px 15px hsla(0,0%,0%,.08);
-    margin: 40px auto;
-    position: relative;
-    //width: 350px;
-    border: 1px solid #B2C1EA;
-    background-image: -webkit-radial-gradient(#d6d5d6 30%, transparent 20%), -webkit-radial-gradient(#cfcfc3 38%, transparent 24%), -webkit-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
-    background-image: -moz-radial-gradient(#d6d5d6 30%, transparent 20%), -moz-radial-gradient(#cfcfc3 38%, transparent 24%), -moz-linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
-    background-image: radial-gradient(#d6d5d6 30%, transparent 20%), radial-gradient(#cfcfc3 38%, transparent 24%), linear-gradient(top, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,0) 95%, hsla(180,75%,50%,.1) 95%, hsla(180,75%,50%,.1) 100%);
-    background-position: 4px 1px, 4px 0px, 50% 0px;
-    background-repeat: repeat-y, repeat-y, repeat;
-    background-size: 30px 30px, 30px 30px, 30px 30px;
-    //padding: 36px 48px 23px 80px;
-    padding-left: 30px;
-}*/
