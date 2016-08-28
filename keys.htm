@@ -1,0 +1,870 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>I want a Terpstra</title>
+	
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="author" content="James Fenn" />
+	
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="skeleton.css">
+	
+	<style>
+		body {
+			/*margin: 0;
+			padding: 0;
+			background-color: #000000;
+			color: white;*/
+		}
+		#fullscreen-setter {
+			background: black;
+			color: white;
+			border-radius: 1em;
+			padding: 1em;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-right: -50%;
+			transform: translate(-50%, -50%);
+			cursor: pointer
+		}
+		#keyboard {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			top: 50%;
+			left: 50%;
+			display: none;
+		}
+		#backButton {
+			position: absolute;
+			left: 0;
+			top: 50%;
+			display: none;
+			z-index: 100;
+		}
+		.iosscrollable {
+			height: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+	</style>
+	
+	<script src="QueryData.compressed.js"></script>
+</head>
+
+<body>
+	
+	<div id="landing-page" class="section">
+		<div class="container">
+			<h1>Edit Settings</h1>
+			<form action="javascript:goKeyboard();">
+				<div class="row">
+					<div class="one-half column">
+
+						<label>Fundamental (Hz)</label>
+						<input id="fundamental" type="number" min="20" max="20000" value="440" onchange="changeURL()" />
+			
+						<label>Right Facing Steps</label>
+						<input id="rSteps" type="number" min="-1220" max="1220" value="0" onchange="changeURL()" />  
+				
+						<label>Up/Right Facing Steps</label>
+						<input id="urSteps" type="number" min="-1220" max="1220" value="0" onchange="changeURL()" />   
+					</div>
+					<div class="one-half column">
+						<label>Hex Size (pixels)</label>
+						<input id="hexSize" type="number" min="20" max="1000" value="50" onchange="changeURL()" /><br />  
+			
+						<label>Rotation (degrees)</label>
+						<input id="rotation" type="number" min="0" max="360" value="0" onchange="changeURL()" /><br />  
+			
+						<label>Instrument</label>
+						<select id='instrument' onchange="changeURL()">
+							<option value="piano">Piano</option>
+							<option value="harpsichord">Harpsichord</option>
+							<option value="rhodes">Rhodes</option>
+							<option value="harp">Harp</option>
+							<option value="choir">Choir</option>
+							<option value="strings">Strings</option>
+							<option value="sawtooth">Sawtooth</option>
+							<option value="gayageum">Gayageum</option>
+							<option value="qanun">Qanun</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="one-half column">
+						<img src="1x1.png" />
+					</div>
+					<div class="one-half column">
+						<label>
+							<input id="enum" type="checkbox" name="number_or_name" value="fnord" onChange="hideRevealNames()" />
+							<span class="label-body">Enumerate Scale</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="one-half column">
+						<label>Scale (scala format)</label>
+						<textarea id="scale" onchange="changeURL()" class="iosscrollable u-full-width" rows="12">! wilcent17.scl
+!
+11-limit 17 tone scale by Erv Wilson
+! Fokblock([64/63, 56/55, 968/945, 36/35], [5, 6, 11, 6]) = 
+! Fokblock([64/63, 56/55, 36/35, 704/675], [5, 3, 6, 11]) =
+! Fokblock([64/63, 968/945, 36/35, 704/675], [5, 13, 6, 6]) wakalix
+17
+!
+22/21
+11/10
+9/8
+7/6
+11/9
+5/4
+4/3
+11/8
+22/15
+3/2
+11/7
+44/27
+5/3
+7/4
+11/6
+15/8
+2/1</textarea>
+				</div>
+				<div class="one-half column">
+					<label id="numberLabel" style="display: none">Steps To Equivalence Interval</label>
+					<input id="equivSteps" type="number" min="1" max="200" value="1" onchange="changeURL()" style="display: none" />
+			
+					<label id="namesLabel">Note Names</label>
+					<textarea id="names" onchange="changeURL()" class="iosscrollable u-full-width" rows="12">R
+22/21
+11/10
+9/8
+7/6
+11/9
+5/4
+4/3
+11/8
+22/15
+3/2
+11/7
+44/27
+5/3
+7/4
+11/6
+15/8</textarea>
+					</div>
+				</div>
+				<br />
+				<input name="Submit" type="submit" value="Make me a microtonal keyboard!" />
+			</div>
+		</form>
+		
+		<div id="donate" class="container">
+			<div id="donateText">
+				Killer Lick Tax
+			</div>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+		</div>
+		<div class="container">
+		Thanks to Scott Thompson and <a href="http://ozanyarman.com/">Dr Ozan Yarman</a> for contributing samples
+		</div>
+	</div>
+	<canvas id="keyboard" tabindex="1"></canvas>
+	
+	<img src='back.png' id='backButton' onclick="back()" />
+	
+	<script>
+		// fill in form 
+		var getData = new QueryData(location.search, true);
+		document.getElementById("fundamental").value = ("fundamental" in getData) ? getData.fundamental : 432;
+		document.getElementById("rSteps").value = ("right" in getData) ? getData.right : 3;
+		document.getElementById("urSteps").value = ("upright" in getData) ? getData.upright : 10;
+		document.getElementById("hexSize").value = ("size" in getData) ? getData.size : 50;
+		document.getElementById("rotation").value = ("rotation" in getData) ? getData.rotation : 23;
+		document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "harp";
+		document.getElementById("enum").checked = ("enum" in getData) ? getData.enum : false;
+		document.getElementById("equivSteps").value = ("equivSteps" in getData) ? getData.equivSteps : 17;
+		
+		if ("scale" in getData) {
+			document.getElementById("scale").value = getData.scale[0];
+		}
+		
+		if ("names" in getData) {
+			document.getElementById("names").value = getData.names[0];
+		} 
+		
+		hideRevealNames();
+		
+		function hideRevealNames() {
+			if (document.getElementById("enum").checked) {
+				document.getElementById("equivSteps").style.display = 'block';
+				document.getElementById("names").style.display = 'none';
+				document.getElementById("numberLabel").style.display = 'block';
+				document.getElementById("namesLabel").style.display = 'none';
+			} else {
+				document.getElementById("equivSteps").style.display = 'none';
+				document.getElementById("names").style.display = 'block';
+				document.getElementById("numberLabel").style.display = 'none';
+				document.getElementById("namesLabel").style.display = 'block';
+			}
+			changeURL();
+		}
+		
+		function Point(x, y) {
+			this.x = x;
+			this.y = y;
+		}
+		
+		Point.prototype.equals = function(p) {
+			return (this.x == p.x && this.y == p.y)
+		}
+		
+		Point.prototype.plus = function(p) {
+			var x = this.x + p.x;
+			var y = this.y + p.y;
+			return (new Point(x, y));
+		}
+		
+		Point.prototype.minus = function(p) {
+			var x = this.x - p.x;
+			var y = this.y - p.y;
+			return (new Point(x, y));
+		}
+		
+		function changeURL() {
+			var url = window.location.pathname + "?";
+			// add fundamental, right, upright, size
+			
+			url += "fundamental=" + document.getElementById("fundamental").value
+					+ "&right=" + document.getElementById("rSteps").value
+					+ "&upright=" + document.getElementById("urSteps").value
+					+ "&size=" + document.getElementById("hexSize").value
+					+ "&rotation=" + document.getElementById("rotation").value
+					+ "&instrument=" + document.getElementById("instrument").value
+					+ "&enum=" + document.getElementById("enum").checked
+					+ "&equivSteps=" + document.getElementById("equivSteps").value;		
+			
+			url += "&scale=";	
+			url += encodeURIComponent(document.getElementById('scale').value);
+			
+			url += "&names=";
+			url += encodeURIComponent(document.getElementById('names').value);
+			
+			// Find scl file description for the page title
+			
+			var scaleLines = document.getElementById('scale').value.split('\n');
+			var first = true;
+			var foundDescription = false;
+			var description = "I want a terpstra!";
+			
+			scaleLines.forEach( function(line) {
+				if(!(foundDescription) && !(line.match(/^\!/)) && line.match(/[a-zA-Z]+/)) {
+					foundDescription = true;
+					description = line;
+				}
+			});
+			
+			document.title = description;
+			
+			window.history.replaceState( {} , '', url ); 
+		}
+		
+		var settings = new Object;
+	
+		function parseScale() {
+			settings.scale = new Array;
+			var scaleLines = document.getElementById('scale').value.split('\n');
+			scaleLines.forEach( function(line) {
+				if (line.match(/^[1234567890.\s/]+$/) && !(line.match(/^\s+$/)) ) { 
+					if (line.match(/\//)) {
+						// ratio
+						var nd = line.split('/');
+						var ratio = 1200 *  Math.log(parseInt(nd[0]) / parseInt(nd[1])) / Math.log(2);
+						settings.scale.push(ratio);
+					} else {
+						if (line.match(/\./))
+						// cents
+							settings.scale.push(parseFloat(line));
+					}
+				}
+			});
+			settings.equivInterval = settings.scale.pop();
+			settings.scale.unshift(0);
+		}
+				
+		function calculateRotationMatrix(rotation, center) {
+			var m = new Array;
+
+			m[0] = Math.cos(rotation);
+			m[1] = Math.sin(rotation);
+			m[2] = -m[1];
+			m[3] = m[0];
+			m[4] = center.x - m[0] * center.x - m[2] * center.y;		
+			m[5] = center.y - m[1] * center.x - m[3] * center.y;
+			
+			return m;
+		}
+		
+		function applyMatrixToPoint(m, p) { /*Array, Point*/
+					return new Point(
+						m[0] * p.x + m[2] * p.y + m[4],
+						m[1] * p.x + m[3] * p.y + m[5]
+					);
+		}
+		
+		function resizeHandler () {
+			// Resize Inner and outer coordinates of canvas to preserve aspect ratio
+		
+			var newWidth = window.innerWidth;
+			var newHeight = window.innerHeight;
+			
+			settings.canvas.style.height = newHeight + 'px';
+			settings.canvas.style.width = newWidth + 'px';
+    
+			settings.canvas.style.marginTop = (-newHeight / 2) + 'px';
+			settings.canvas.style.marginLeft = (-newWidth / 2) + 'px';
+    
+			settings.canvas.width = newWidth;
+			settings.canvas.height = newHeight;
+			
+			// Find new centerpoint
+			
+			var centerX = newWidth / 2;
+			var centerY = newHeight / 2;
+			settings.centerpoint = new Point(centerX, centerY);
+			
+			// Rotate about it
+
+			if (settings.rotationMatrix) { 
+				settings.context.restore();
+			}
+			settings.context.save();
+			
+			settings.rotationMatrix = calculateRotationMatrix(-settings.rotation, settings.centerpoint);
+			
+			var m = calculateRotationMatrix(settings.rotation, settings.centerpoint);
+			settings.context.setTransform(m[0], m[1], m[2], m[3], m[4], m[5]);
+			
+			// Redraw Grid
+			
+			drawGrid();
+		}
+		
+		function back() {
+			document.getElementById("keyboard").style.display = "none";
+			document.getElementById("backButton").style.display = "none";
+			document.getElementById("landing-page").style.display = "block";
+			document.body.style.overflow = 'scroll';
+		}
+		
+		function goKeyboard() {
+		
+			changeURL();
+			
+			// Set up screen 
+			
+			document.getElementById("landing-page").style.display = "none";
+			document.getElementById("keyboard").style.display = "block";
+			document.body.style.overflow = 'hidden';
+			document.getElementById("backButton").style.display = "block";
+			
+			// set up settings constants
+			
+			settings.fundamental = document.getElementById("fundamental").value;
+			settings.rSteps = document.getElementById("rSteps").value;
+			settings.urSteps = parseFloat(settings.rSteps) - parseFloat(document.getElementById("urSteps").value); // Adjust to different coordinate system
+			settings.hexSize = document.getElementById("hexSize").value;
+			settings.rotation = (document.getElementById("rotation").value * 2 * Math.PI) / 360;
+			parseScale();
+			settings.names = document.getElementById('names').value.split('\n');
+			settings.enum = document.getElementById('enum').checked;
+			settings.equivSteps = parseInt(document.getElementById('equivSteps').value);
+			
+			settings.canvas = document.getElementById('keyboard');
+			settings.context = settings.canvas.getContext('2d');
+			
+			settings.hexHeight = settings.hexSize * 2;
+			settings.hexVert = settings.hexHeight * 3/4;
+			settings.hexWidth = Math.sqrt(3)/2 * settings.hexHeight;
+			
+			// Set up resize handler
+			
+			window.addEventListener('resize', resizeHandler, false);
+			window.addEventListener('orientationchange', resizeHandler, false);
+			
+			//... and give it an initial call
+			
+			resizeHandler();			
+			
+			// Set up synth
+			
+			settings.sampleBuffer = [,,,];
+			var instrumentOption = document.getElementById("instrument").selectedIndex;
+			var instruments = [
+				{ fileName : "piano", fade : 0.1},
+				{ fileName : "harpsichord", fade : 0.2},
+				{ fileName : "rhodes", fade : 0.1},
+				{ fileName : "harp", fade : 0.2},
+				{ fileName : "choir", fade : 0.5},
+				{ fileName : "strings", fade : 0.9},
+				{ fileName : "sawtooth", fade : 0.2},
+				{ fileName : "gayageum", fade : 1},
+				{ fileName : "qanun", fade : 1}
+				
+			];
+			
+			//console.log(instruments[instrumentOption]);
+			
+			loadSample(instruments[instrumentOption].fileName, 0);
+			settings.sampleFadeout = instruments[instrumentOption].fade;
+			
+			// Set up keyboard, touch and mouse event handlers
+			
+			settings.sustain = false;
+			settings.sustainedNotes = new Array;
+			//settings.canvas.addEventListener("keydown", sustainOn, false); // Firefox isn't firing :(
+			//settings.canvas.addEventListener("keyup", sustainOff, false);
+			
+			window.addEventListener("keydown", sustainOn, true);
+			window.addEventListener("keyup", sustainOff, false);
+			
+			settings.activeHexObjects = new Array;
+			settings.canvas.addEventListener("touchstart", handleTouch, false);
+			settings.canvas.addEventListener("touchend", handleTouch, false);
+			settings.canvas.addEventListener("touchmove", handleTouch, false);
+			
+			settings.canvas.addEventListener("mousedown", function(e) {
+				settings.canvas.addEventListener("mousemove", mouseActive, false);
+				mouseActive(e);
+			}, false);
+			
+			settings.canvas.addEventListener("mouseup", function(e) {
+				settings.canvas.removeEventListener("mousemove", mouseActive);
+				var coords = settings.activeHexObjects[0].coords;
+				settings.activeHexObjects[0].noteOff();
+				drawHex(coords, centsToColor(hexCoordsToCents(coords), false));
+				settings.activeHexObjects.pop();
+			}, false);
+		}
+		
+		function sustainOn (e) {
+			//console.log("sustain On");
+			if (e.keyCode == 32) {  // Spacebar
+				settings.sustain = true;
+			}
+		}
+		
+		function sustainOff (e) {
+			if (e.keyCode == 32) {  // Spacebar
+				settings.sustain = false;
+				for (var note = 0; note < settings.sustainedNotes.length; note++) {
+					settings.sustainedNotes[note].noteOff();
+				}
+				settings.sustainedNotes = new Array;
+			}
+		}
+		
+		function mouseActive (e) {		
+			var coords = getPointerPosition(e);
+		
+			coords = getHexCoordsAt(coords);
+			
+			if (settings.activeHexObjects.length == 0) {
+				settings.activeHexObjects[0] = new ActiveHex(coords);
+				var cents = hexCoordsToCents(coords);
+				settings.activeHexObjects[0].noteOn(cents);
+				drawHex(coords, centsToColor(cents, true)); 			
+			} else {
+				if (!(coords.equals(settings.activeHexObjects[0].coords))) {
+					settings.activeHexObjects[0].noteOff();
+					drawHex(settings.activeHexObjects[0].coords, centsToColor(hexCoordsToCents(settings.activeHexObjects[0].coords, false))); 
+					
+					settings.activeHexObjects[0] = new ActiveHex(coords);
+					var cents = hexCoordsToCents(coords);
+					settings.activeHexObjects[0].noteOn(cents);
+					drawHex(coords, centsToColor(cents, true));
+				}
+			}
+		}
+		
+		function getPointerPosition(e) {
+			var parentPosition = getPosition(e.currentTarget);
+			var xPosition = e.clientX - parentPosition.x;
+			var yPosition = e.clientY - parentPosition.y;
+			return new Point(xPosition, yPosition);
+		}
+ 
+		function getPosition(element) {
+			var xPosition = 0;
+			var yPosition = 0;
+      
+			while (element) {
+				xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+				yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+				element = element.offsetParent;
+			}
+			return { x: xPosition, y: yPosition };
+		}
+		
+		function handleTouch(e) {
+			e.preventDefault();
+			
+			for (var i = 0; i < settings.activeHexObjects.length; i++) {
+				settings.activeHexObjects[i].release = true; 
+			}
+			
+			for (var i = 0; i < e.targetTouches.length; i++) {
+				var coords = getHexCoordsAt(new Point(e.targetTouches[i].pageX - settings.canvas.offsetLeft, e.targetTouches[i].pageY - settings.canvas.offsetTop));
+				var found = false;
+				
+				for (var j = 0; j < settings.activeHexObjects.length; j++) {
+					if (coords.equals(settings.activeHexObjects[j].coords)) {
+						settings.activeHexObjects[j].release = false;
+						found = true;
+						
+					}
+				}
+				if (!(found)) {
+					var newHex = new ActiveHex(coords);
+					var cents = hexCoordsToCents(coords);
+					newHex.noteOn(cents);
+					var c = centsToColor(cents, true);
+					drawHex(coords, c);
+					settings.activeHexObjects.push(newHex);
+				}
+			}
+			
+			for (var i = settings.activeHexObjects.length - 1; i >= 0; i--) {
+				if (settings.activeHexObjects[i].release) {
+					settings.activeHexObjects[i].noteOff();
+					var coords = settings.activeHexObjects[i].coords;
+					var c = centsToColor(hexCoordsToCents(coords), false);
+					drawHex(coords, c);
+					settings.activeHexObjects.splice(i, 1);
+				}
+			}
+		}
+		
+		function drawGrid() {
+			var max = (settings.centerpoint.x > settings.centerpoint.y) ? settings.centerpoint.x / settings.hexSize : settings.centerpoint.y / settings.hexSize;
+			max = Math.floor(max);
+			for (var r = -max; r < max; r++) {
+				for (var ur = -max; ur < max; ur++) {
+					var coords = new Point(r, ur);
+					var c = centsToColor(hexCoordsToCents(coords), false);
+					drawHex(coords, c);
+				}
+			}
+		}
+		
+		function hexCoordsToScreen(hex) { /* Point */
+			var screenX = settings.centerpoint.x + hex.x * settings.hexWidth + hex.y * settings.hexWidth / 2;
+			var screenY = settings.centerpoint.y + hex.y * settings.hexVert;
+			return (new Point(screenX, screenY));
+		}
+		
+		function drawHex(p, c) { /* Point, color */
+			
+			var hexCenter = hexCoordsToScreen(p);
+			
+			// Calculate hex vertices
+			
+			var x = new Array;
+			var y = new Array;
+			for (var i = 0; i < 6; i++) {
+				var angle = 2 * Math.PI / 6 * (i + 0.5);
+				x[i] = hexCenter.x + settings.hexSize * Math.cos(angle);
+				y[i] = hexCenter.y + settings.hexSize * Math.sin(angle);
+			}
+			
+			// Draw filled hex
+			
+			settings.context.beginPath();
+			settings.context.moveTo(x[0], y[0]);
+			for (var i = 1; i < 6; i++) {
+				settings.context.lineTo(x[i], y[i]);
+			}
+			settings.context.closePath();
+			settings.context.fillStyle = c;
+			settings.context.fill();
+			
+			// Save context and create a hex shaped clip
+			
+			settings.context.save();
+			settings.context.beginPath();
+			settings.context.moveTo(x[0], y[0]);
+			for (var i = 1; i < 6; i++) {
+				settings.context.lineTo(x[i], y[i]);
+			}
+			settings.context.closePath();
+			settings.context.clip();
+			
+			// Calculate hex vertices outside clipped path
+			
+			var x2 = new Array;
+			var y2 = new Array;
+			for (var i = 0; i < 6; i++) {
+				var angle = 2 * Math.PI / 6 * (i + 0.5);
+				x2[i] = hexCenter.x + (parseFloat(settings.hexSize) + 3) * Math.cos(angle);
+				y2[i] = hexCenter.y + (parseFloat(settings.hexSize) + 3) * Math.sin(angle);
+			}
+			
+			// Draw shadowed stroke outside clip to create pseudo-3d effect 
+			
+			settings.context.beginPath();
+			settings.context.moveTo(x2[0], y2[0]);
+			for (var i = 1; i < 6; i++) {
+				settings.context.lineTo(x2[i], y2[i]);
+			}
+			settings.context.closePath();
+			settings.context.strokeStyle = 'black';
+			settings.context.lineWidth = 5;
+			settings.context.shadowBlur = 15;
+			settings.context.shadowColor = 'black';
+			settings.context.shadowOffsetX = 0;
+			settings.context.shadowOffsetY = 0;
+			settings.context.stroke();
+			settings.context.restore();
+			
+			// Add a clean stroke around hex
+			
+			settings.context.beginPath();
+			settings.context.moveTo(x[0], y[0]);
+			for (var i = 1; i < 6; i++) {
+				settings.context.lineTo(x[i], y[i]);
+			}
+			settings.context.closePath();
+			settings.context.lineWidth = 2;
+			settings.context.lineJoin = 'round';
+			settings.context.strokeStyle = 'black';
+			settings.context.stroke();
+			
+			// Add note name and equivalence interval multiple
+			
+			settings.context.save();
+			settings.context.translate(hexCenter.x, hexCenter.y);
+			settings.context.rotate(-settings.rotation);
+			// hexcoords = p and screenCoords = hexCenter
+	
+			settings.context.fillStyle = "black";
+			settings.context.font = "24pt Arial";
+			settings.context.textAlign = "center";
+			settings.context.textBaseline = "middle";
+			
+			var note = p.x * settings.rSteps + p.y * settings.urSteps;
+			var equivSteps = settings.enum ? parseInt(settings.equivSteps) : settings.scale.length;
+			var equivMultiple = Math.floor(note / equivSteps);
+			var reducedNote = note % equivSteps;
+			if (reducedNote < 0) {
+				reducedNote = equivSteps + reducedNote;
+			}
+			
+			var name = settings.enum ? "" + reducedNote : settings.names[reducedNote];
+			if (name) {
+				settings.context.save();
+				var scaleFactor = name.length > 3 ? 3 / name.length : 1;
+				scaleFactor *= settings.hexSize / 50;
+				settings.context.scale(scaleFactor, scaleFactor);
+				settings.context.fillText(name, 0, 0);
+				settings.context.restore();
+			}
+			
+			var scaleFactor = settings.hexSize / 50;
+			settings.context.scale(scaleFactor, scaleFactor);
+			settings.context.translate(10, -25);
+			settings.context.fillStyle = "white";
+			settings.context.font = "12pt Arial";
+			settings.context.textAlign = "center";
+			settings.context.textBaseline = "middle";
+			settings.context.fillText(equivMultiple, 0, 0);
+			
+			settings.context.restore();
+		}
+		
+		function centsToColor(cents, pressed) {
+			var h = 2/3; // blue
+			var reduced = (cents / 1200) % 1;
+			if (reduced < 0) reduced += 1;
+			h = (reduced + h) % 1;
+			var v = (pressed) ? 0.5 : 1;
+			return HSVtoRGB(h, 0.7, v);
+		}
+		
+		function roundTowardZero(val) {
+			if (val < 0) {
+				return Math.ceil(val);
+			}
+    		return Math.floor(val);
+		}
+		
+		function hexCoordsToCents(coords) {
+			var distance = coords.x * settings.rSteps + coords.y * settings.urSteps;
+			var octs = roundTowardZero(distance / settings.scale.length);
+			var reducedSteps = distance % settings.scale.length;
+			if (reducedSteps < 0) {
+				reducedSteps += settings.scale.length;
+				octs -= 1;
+			}
+			var cents = octs * settings.equivInterval + settings.scale[reducedSteps];
+			return cents;
+		}
+		
+		function getHexCoordsAt(coords) {
+			coords = applyMatrixToPoint(settings.rotationMatrix, coords);
+			var x = coords.x - settings.centerpoint.x;
+			var y = coords.y - settings.centerpoint.y;
+
+			var q = (x * Math.sqrt(3)/3 - y / 3) / settings.hexSize;
+			var r = y * 2/3 / settings.hexSize;
+			
+			q = Math.round(q);
+			r = Math.round(r);
+			
+			var guess = hexCoordsToScreen(new Point(q, r));
+			
+			// This gets an approximation; now check neighbours for minimum distance
+			
+			var minimum = 100000;
+			var closestHex = new Point(q, r);
+			for (var qOffset = -1; qOffset < 2; qOffset++) {
+				for (var rOffset = -1; rOffset < 2; rOffset++) {
+					var neighbour = new Point(q + qOffset, r + rOffset);
+					var diff = hexCoordsToScreen(neighbour).minus(coords);
+					var distance = diff.x * diff.x + diff.y * diff.y;
+					if (distance < minimum) {
+						minimum = distance;
+						closestHex = neighbour;
+					}
+				}
+			}
+			
+			return(closestHex);  
+		}
+		
+		function rgb(r, g, b) {
+			return "rgb("+r+","+g+","+b+")";
+		}
+		
+		function HSVtoRGB(h, s, v) {
+			var r, g, b, i, f, p, q, t;
+			i = Math.floor(h * 6);
+			f = h * 6 - i;
+			p = v * (1 - s);
+			q = v * (1 - f * s);
+			t = v * (1 - (1 - f) * s);
+			switch (i % 6) {
+				case 0: r = v, g = t, b = p; break;
+				case 1: r = q, g = v, b = p; break;
+				case 2: r = p, g = v, b = t; break;
+				case 3: r = p, g = q, b = v; break;
+				case 4: r = t, g = p, b = v; break;
+				case 5: r = v, g = p, b = q; break;
+			}
+			return rgb(Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255));
+		}
+
+		function ActiveHex(coords) {
+			this.coords = coords;
+			this.release = false;
+			this.freq = 440;
+		}
+		
+		ActiveHex.prototype.noteOn = function(cents) {
+			var freq = settings.fundamental * Math.pow(2, cents / 1200);
+			var source = settings.audioContext.createBufferSource(); // creates a sound source
+			// Choose sample
+			var sampleFreq = 110;
+			var sampleNumber = 0;
+			if (freq > 155) {
+				if (freq > 311) {
+					if (freq > 622) {
+						sampleFreq = 880; sampleNumber = 3;
+					} else {
+						sampleFreq = 440; sampleNumber = 2;
+					}
+				} else {
+					sampleFreq = 220; sampleNumber = 1;
+				}				
+			}
+			
+			if (!(settings.sampleBuffer[sampleNumber])) return; // Sample not yet loaded
+			
+			source.buffer = settings.sampleBuffer[sampleNumber];     // tell the source which sound to play
+			source.playbackRate.value = freq / sampleFreq;
+			// Create a gain node.
+			var gainNode = settings.audioContext.createGain();
+			// Connect the source to the gain node.
+			source.connect(gainNode);
+			// Connect the gain node to the destination.
+			gainNode.connect(settings.audioContext.destination);
+			source.connect(gainNode);       // connect the source to the context's destination (the speakers)
+			gainNode.gain.value = 0.3;
+			source.start(0);                           // play the source now
+            this.source = source;
+			this.gainNode = gainNode;
+		}
+		
+		ActiveHex.prototype.noteOff = function() {
+			if (settings.sustain) {
+				settings.sustainedNotes.push(this);
+			} else {
+			var fadeout = settings.audioContext.currentTime + settings.sampleFadeout;
+				if (this.gainNode) this.gainNode.gain.setTargetAtTime(0, settings.audioContext.currentTime, settings.sampleFadeout);
+				if (this.source) this.source.stop(fadeout + 4); // This is a terrible fudge. Please forgive me - it's late, I'm tired, I have a deadline, I've got other shit to do
+
+			}
+		}
+		
+window.addEventListener('load', init, false);
+
+function init() {
+  try {
+    // Fix up for prefixing
+    window.AudioContext = window.AudioContext||window.webkitAudioContext;
+    settings.audioContext = new AudioContext();
+  }
+  catch(e) {
+    alert('Web Audio API is not supported in this browser');
+  }
+}
+	
+	function loadSample(name, iteration) {
+		// It seems audioContext doesn't cope with simultaneous decodeAudioData calls ):
+		
+		var sampleFreqs = ["110", "220", "440", "880"];
+		//for (var i = 0; i < 4; ++i) {
+			var request = new XMLHttpRequest();
+			var url = 'sounds/' + name + sampleFreqs[iteration] + '.mp3';
+			//console.log(iteration);
+			request.open('GET', url, true);
+			request.responseType = 'arraybuffer';
+
+			// Decode asynchronously
+			request.onload = function() {
+				settings.audioContext.decodeAudioData(request.response, function(buffer) {
+				settings.sampleBuffer[iteration] = buffer;
+				if (iteration < 3) loadSample(name, iteration + 1);
+				}, onLoadError);
+			}
+			request.send();
+		//}
+	}
+	
+function onLoadError(e) {
+	alert("Couldn't load sample");
+}
+	
+	</script>
+</body>
+</html>
