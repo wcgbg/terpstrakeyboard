@@ -365,13 +365,64 @@ function goKeyboard() {
 
   settings.sustain = false;
   settings.sustainedNotes = [];
-  //settings.canvas.addEventListener("keydown", sustainOn, false); // Firefox isn't firing :(
-  //settings.canvas.addEventListener("keyup", sustainOff, false);
+  //settings.canvas.addEventListener("keydown", onKeyDown, false); // Firefox isn't firing :(
+  //settings.canvas.addEventListener("keyup", onKeyUp, false);
 
-  if (typeof(shake_sustain) == 'undefined') {
-    shake_sustain = 1;
-    window.addEventListener("keydown", sustainOn, true);
-    window.addEventListener("keyup", sustainOff, false);
+  if (typeof(is_key_event_added) == 'undefined') {
+    is_key_event_added = 1;
+    settings.pressedKeys = [];
+    settings.keyCodeToCoords = {
+      49 : new Point(-5, -2), // 1
+      50 : new Point(-4, -2), // 2
+      51 : new Point(-3, -2), // 3
+      52 : new Point(-2, -2), // 4
+      53 : new Point(-1, -2), // 5
+      54 : new Point(0, -2), // 6
+      55 : new Point(1, -2), // 7
+      56 : new Point(2, -2), // 8
+      57 : new Point(3, -2), // 9
+      48 : new Point(4, -2), // 0
+      189 : new Point(5, -2), // -
+      187 : new Point(6, -2), // =
+
+      81 : new Point(-5, -1), // Q
+      87 : new Point(-4, -1), // W
+      69 : new Point(-3, -1), // E
+      82 : new Point(-2, -1), // R
+      84 : new Point(-1, -1), // T
+      89 : new Point(0, -1), // Y
+      85 : new Point(1, -1), // U
+      73 : new Point(2, -1), // I
+      79 : new Point(3, -1), // O
+      80 : new Point(4, -1), // P
+      219 : new Point(5, -1), // [
+      221 : new Point(6, -1), // ]
+
+      65 : new Point(-5, 0), // A
+      83 : new Point(-4, 0), // S
+      68 : new Point(-3, 0), // D
+      70 : new Point(-2, 0), // F
+      71 : new Point(-1, 0), // G
+      72 : new Point(0, 0), // H
+      74 : new Point(1, 0), // J
+      75 : new Point(2, 0), // K
+      76 : new Point(3, 0), // L
+      186 : new Point(4, 0), // ;
+      222 : new Point(5, 0), // '
+
+      90 : new Point(-5, 1), // Z
+      88 : new Point(-4, 1), // X
+      67 : new Point(-3, 1), // C
+      86 : new Point(-2, 1), // V
+      66 : new Point(-1, 1), // B
+      78 : new Point(0, 1), // N
+      77 : new Point(1, 1), // M
+      188 : new Point(2, 1), // ,
+      190 : new Point(3, 1), // .
+      191 : new Point(4, 1), // /
+    };
+    window.addEventListener("keydown", onKeyDown, true);
+    window.addEventListener("keyup", onKeyUp, false);
   }
 
   //iPad Shake to toggle sustain
@@ -432,39 +483,75 @@ function goKeyboard() {
   //
 
   settings.activeHexObjects = [];
+  settings.isTouchDown = false;
   settings.canvas.addEventListener("touchstart", handleTouch, false);
   settings.canvas.addEventListener("touchend", handleTouch, false);
   settings.canvas.addEventListener("touchmove", handleTouch, false);
 
+  settings.isMouseDown = false;
   settings.canvas.addEventListener("mousedown", function(e) {
+    if (settings.pressedKeys.length != 0 || settings.isTouchDown) {
+      return;
+    }
+    settings.isMouseDown = true;
     settings.canvas.addEventListener("mousemove", mouseActive, false);
     mouseActive(e);
   }, false);
 
   settings.canvas.addEventListener("mouseup", function(e) {
+    settings.isMouseDown = false;
+    if (settings.pressedKeys.length != 0 || settings.isTouchDown) {
+      return;
+    }
     settings.canvas.removeEventListener("mousemove", mouseActive);
-    var coords = settings.activeHexObjects[0].coords;
-    settings.activeHexObjects[0].noteOff();
-    drawHex(coords, centsToColor(hexCoordsToCents(coords), false));
-    settings.activeHexObjects.pop();
+    if (settings.activeHexObjects.length > 0) {
+      var coords = settings.activeHexObjects[0].coords;
+      settings.activeHexObjects[0].noteOff();
+      drawHex(coords, centsToColor(hexCoordsToCents(coords), false));
+      settings.activeHexObjects.pop();
+    }
   }, false);
   return false;
 }
 
-function sustainOn(e) {
-  //console.log("sustain On");
+function onKeyDown(e) {
   if (e.keyCode == 32) { // Spacebar
     settings.sustain = true;
+  } else if (!settings.isMouseDown && !settings.isTouchDown
+      && (e.keyCode in settings.keyCodeToCoords)
+      && settings.pressedKeys.indexOf(e.keyCode) == -1) {
+    settings.pressedKeys.push(e.keyCode);
+    var coords = settings.keyCodeToCoords[e.keyCode];
+    var hex = new ActiveHex(coords);
+    settings.activeHexObjects.push(hex);
+    var cents = hexCoordsToCents(coords);
+    drawHex(coords, centsToColor(cents, true));
+    hex.noteOn(cents);
   }
 }
 
-function sustainOff(e) {
+function onKeyUp(e) {
   if (e.keyCode == 32) { // Spacebar
     settings.sustain = false;
     for (var note = 0; note < settings.sustainedNotes.length; note++) {
       settings.sustainedNotes[note].noteOff();
     }
     settings.sustainedNotes = [];
+  } else if (!settings.isMouseDown && !settings.isTouchDown
+      && (e.keyCode in settings.keyCodeToCoords)) {
+    var keyIndex = settings.pressedKeys.indexOf(e.keyCode);
+    if (keyIndex != -1) {
+      settings.pressedKeys.splice(keyIndex, 1);
+      var coords = settings.keyCodeToCoords[e.keyCode];
+      drawHex(coords, centsToColor(hexCoordsToCents(coords), false));
+      var hexIndex = settings.activeHexObjects.findIndex(function(hex) {
+        return coords.equals(hex.coords);
+      });
+      if (hexIndex != -1) {
+        settings.activeHexObjects[hexIndex].noteOff();
+        settings.activeHexObjects.splice(hexIndex, 1);
+      }
+    }
   }
 }
 
@@ -516,6 +603,11 @@ function getPosition(element) {
 
 function handleTouch(e) {
   e.preventDefault();
+  if (settings.pressedKeys.length != 0 || settings.isMouseDown) {
+    settings.isTouchDown = false;
+    return;
+  }
+  settings.isTouchDown = e.targetTouches.length != 0;
 
   for (var i = 0; i < settings.activeHexObjects.length; i++) {
     settings.activeHexObjects[i].release = true;
