@@ -344,10 +344,19 @@ function goKeyboard() {
       fileName: "organleslie",
       fade: 0.1
     }, {
+      fileName: "marimba",
+      fade: 0.1
+    }, {
+      fileName: "musicbox",
+      fade: 0.1
+    }, {
       fileName: "WMRI3LST",
       fade: 0.1
     }, {
       fileName: "WMRI5LST",
+      fade: 0.1
+    }, {
+      fileName: "WMRI5Lpike",
       fade: 0.1
     }, {
       fileName: "WMRI7LST",

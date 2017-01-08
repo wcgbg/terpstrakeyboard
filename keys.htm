@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Terpstra Keyboard WebApp</title>
+	<title>Terpstra Keyboard WebApp</title>
 
 	<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, target-densitydpi=device-dpi">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="author" content="James Fenn">
 
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="skeleton.css">
-    <link rel="stylesheet" href="terpstra-style.css">
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="skeleton.css">
+	<link rel="stylesheet" href="terpstra-style.css">
 
-    <script src="QueryData.js"></script>
-    <script src="jscolor.js"></script>
+	<script src="QueryData.js"></script>
+	<script src="jscolor.js"></script>
 </head>
 
 <body style="overflow: scroll;">
 
-    <div id="landing-page" class="section" style="display: block;">
-        <div class="container">
-          <h2><a href="http://terpstrakeyboard.com/">Terpstra Keyboard</a> <a href="http://terpstrakeyboard.com/play-it-now/">WebApp</a></h2>
-          <div class="row">
+	<div id="landing-page" class="section" style="display: block;">
+		<div class="container">
+		  <h2><a href="http://terpstrakeyboard.com/">Terpstra Keyboard</a> <a href="http://terpstrakeyboard.com/play-it-now/">WebApp</a></h2>
+		  <div class="row">
               <img alt="" src="1x1.png">
           </div>
 
-            <form id="settingsForm">
-                <div class="row">
-                    <div class="one-half column thincol-parent">
-                        <div class="u-half-width rpad">
+			<form id="settingsForm">
+				<div class="row">
+					<div class="one-half column thincol-parent">
+						<div class="u-half-width rpad">
 
                           <label>Tuning\Layout Quick Links</label>
                           <select id="quicklinks" onchange="javascript:location.href = this.value;" class="u-full-width">
@@ -37,7 +37,7 @@
                               <optgroup label="Isomorphic Layouts for 12-ET">
                                   <option value="?fundamental=261.6255653&right=2&upright=1&size=50&rotation=343.897886248&instrument=piano&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Jank%C3%B3%206-6%20Balanced%20Symmetric%20Bilinear%20Uniform%20Keyboard%20~Halberstadt.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20a%20(hexagonal)%20tilted%20Jank%C3%B3%20layout%20which%20can%20be%20regarded%20as%20a%20stacked%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%2C%20and%20which%20approximates%20the%207-white%2F5-black%20Halberstadt%20organ%20layout%20(the%20classic%20piano%20keyboard).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Jank%C3%B3%20%2F%206-6%2FBalanced%2FSymmetric%2FBilinear%2FUniform%20Keyboard%20%2F%20~Halberstadt%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff%0A7b7b7b%0Affffff">Jankó / 6-6/Balanced/Symmetric/Bilinear/Uniform</option>
 
-                                  <option value="?fundamental=261.6255653&right=4&upright=7&size=50&rotation=343.897886248&instrument=harpsichord&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Harmonic%20Table%20Sonome%20Tonnetz%205-Limit%20Tuning%20Lattice%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony).scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Harmonic%20Table%20layout%2C%20also%20known%20as%20Sonome%3A%20a%20tonal%20array%20topologically%20equivalent%20to%20Euler%27s%20Tonnetz%2C%20which%20is%20a%20conceptual%20lattice%20diagram%20representing%20tonal%20space%2C%20also%20known%20as%205-Limit%20Tuning%20Lattice%20or%20Tri-Axial%20The%20Matrix%20Model%20(of%20Musical%20Harmony).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Harmonic%20Table%20%2F%20Sonome%20%2F%20Tonnetz%20%2F%205-Limit%20Tuning%20Lattice%20%2F%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony)%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0Abababa%0A8ef4fb%0Abababa%0Affffff%0Affffff%0Abababa%0Affffff%0A49aded%0Affffff%0Abababa%0Affffff">Harmonic Table / Sonome / Tonnetz / 5-L Lattice / Matrix Model</option>
+                                  <option value="?fundamental=261.6255653&right=4&upright=7&size=50&rotation=343.897886248&instrument=harpsichord&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Harmonic%20Table%20Sonome%20Tonnetz%205-Limit%20Tuning%20Lattice%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony).scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Harmonic%20Table%20layout%2C%20also%20known%20as%20Sonome%3A%20a%20tonal%20array%20topologically%20equivalent%20to%20Euler%27s%20Tonnetz%2C%20which%20is%20a%20conceptual%20lattice%20diagram%20representing%20tonal%20space%2C%20also%20known%20as%205-Limit%20Tuning%20Lattice%20or%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Harmonic%20Table%20%2F%20Sonome%20%2F%20Tonnetz%20%2F%205-Limit%20Tuning%20Lattice%20%2F%20Tri-Axial%20Matrix%20Model%20(of%20Musical%20Harmony)%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0Abababa%0A8ef4fb%0Abababa%0Affffff%0Affffff%0Abababa%0Affffff%0A49aded%0Affffff%0Abababa%0Affffff">Harmonic Table / Sonome / Tonnetz / 5-L Lattice / Matrix Model</option>
 
                                   <option value="?fundamental=261.6255653&right=2&upright=7&size=50&rotation=343.897886248&instrument=rhodes&enum=false&equivSteps=12&piano_colors=true&spectrum_colors=false&no_labels=false&scale=!%2012-ed2%20Wicki-Hayden.scl%0A!%2012-tone%20equal%20tempered%20scale%20consisting%20of%2012%20sonically%20equal%20divisions%20per%20frequency%20halving%2Fdoubling%2C%20mapped%20on%20the%20Wicki-Hayden%20layout%2C%20originally%20devised%20for%20the%20bandoneon%20and%20concertina%20(free-reed%20aerophones%20of%20the%20harmonica%2Faccordion%20family).%0A!%0ATerpstra%20Keyboard%20WebApp%20%7C%2012-ed2%20Wicki-Hayden%0A12%0A!%0A100.00000%0A200.00000%0A300.00000%0A400.00000%0A500.00000%0A600.00000%0A700.00000%0A800.00000%0A900.00000%0A1000.00000%0A1100.00000%0A1200.00000&names=C%0AD%E2%99%AD%2FC%E2%99%AF%0AD%0AE%E2%99%AD%2FD%E2%99%AF%0AE%0AF%0AG%E2%99%AD%2FF%E2%99%AF%0AG%0AA%E2%99%AD%2FG%E2%99%AF%0AA%0AB%E2%99%AD%2FA%E2%99%AF%0AB&note_colors=ffffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff%0Affffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff%0Aff9f40%0Affffff">Wicki-Hayden</option>
 
@@ -80,27 +80,27 @@
                           <input id="fundamental" type="number" step="any" min="0.015625" max="16384" value="256" onchange="changeURL();noPreset();" class="u-full-width">
                        </div>
 
-                        <div class="u-half-width">
+						<div class="u-half-width">
 
                           <label>Right Facing Steps</label>
                           <input id="rSteps" type="number" min="-1220" max="1220" value="4" onchange="changeURL();noPreset();" class="u-full-width">
 
                           <label>Up/Right Facing Steps</label>
                           <input id="urSteps" type="number" min="-1220" max="1220" value="7" onchange="changeURL();noPreset();" class="u-full-width">
-                        </div>
+						</div>
                     </div>
 
-                    <div class="one-half column thincol-parent">
-                        <div class="u-half-width rpad">
+					<div class="one-half column thincol-parent">
+						<div class="u-half-width rpad">
 
                           <label>Hex Size (pixels)</label>
                           <input id="hexSize" type="number" step="any" min="20" max="1000" value="50" onchange="changeURL();noPreset();" class="u-full-width">
 
                           <label>Rotation (degrees)</label>
                           <input id="rotation" type="number" step="any" min="0" max="360" value="343.897886248" onchange="changeURL();noPreset();" class="u-full-width">
-                        </div>
+						</div>
 
-                        <div class="u-half-width">
+						<div class="u-half-width">
 
                           <label>Instrument</label>
                           <select id="instrument" onchange="changeURL();noPreset();"  class="u-full-width">
@@ -116,10 +116,13 @@
                                 <option value="qanun">Qanun</option>
                                 <option value="organ">Organ</option>
                                 <option value="organleslie">Organ + Leslie</option>
+                                <option value="marimba">Marimba</option>
+                                <option value="musicbox">Music Box</option>
                             </optgroup>
                             <optgroup label="«What Music Really İs» Study Tones">
                                 <option value="WMRI3LST">WMRİ 3-Limit (4 Harmonics) ST</option>
                                 <option value="WMRI5LST">WMRİ 5-Limit (6 Harmonics) ST</option>
+                                <option value="WMRI5Lpike">WMRİ 5-Limit (6 Harmonics) Pk</option>
                                 <option value="WMRI7LST">WMRİ 7-Limit (10 Harmonics) ST</option>
                                 <option value="WMRI11LST">WMRİ 11-Limit (12 Harmonics) ST</option>
                                 <option value="WMRI13LST">WMRİ 13-Limit (16 Harmonics) ST</option>
@@ -142,18 +145,18 @@
                               <input id="no_labels" type="checkbox" name="no_labels" value="fnord" onchange="hideRevealEnum();noPreset();">
                               <span class="label-body">Blank Keys (No labels)</span>
                           </label>
-                        </div>
-                    </div>
-                </div>
+						</div>
+					</div>
+				</div>
 
                 <div class="row">
                     <img alt="" src="1x1.png" style="margin: 1.5%">
                 </div>
 
-                <div class="row">
-                    <div class="one-half column pushrow-mobile">
-                        <label>Scale (<a href="http://www.huygens-fokker.org/scala/scl_format.html" target="new" style="color: #222; text-decoration: none;">Scala format</a>)</label>
-                        <textarea id="scale" onchange="changeURL();noPreset();" class="iosscrollable u-full-width" rows="12">! 31-ed2 Bosanquet Wilson Terpstra.scl
+				<div class="row">
+					<div class="one-half column pushrow-mobile">
+						<label>Scale (<a href="http://www.huygens-fokker.org/scala/scl_format.html" target="new" style="color: #222; text-decoration: none;">Scala format</a>)</label>
+						<textarea id="scale" onchange="changeURL();noPreset();" class="iosscrollable u-full-width" rows="12">! 31-ed2 Bosanquet Wilson Terpstra.scl
 ! 31-tone equal tempered scale consisting of 31 sonically equal divisions per frequency halving/doubling in standard meantone notation, mapped on a Bosanquet / Wilson / Terpstra layout.
 !
 Terpstra Keyboard WebApp | 31-ed2 Bosanquet / Wilson / Terpstra
@@ -229,7 +232,7 @@ A×
 B
 C♭
 B♯</textarea>
-                    </div>
+					</div>
 
                     <div class="u-half-width">
                         <label id="fundamental_colorLabel" style="display: none;">Fundamental Color</label>
@@ -270,21 +273,21 @@ cfcfcf
 ffffff</textarea>
                     </div>
                   </div>
-                </div>
-                <br>
-                <input name="Submit" type="submit" value="Make me a microtonal keyboard!">
+				</div>
+				<br>
+				<input name="Submit" type="submit" value="Make me a microtonal keyboard!">
             </form>
         </div>
 
-        <div class="container">
-          Designed by <a href="http://siementerpstra.com/" target="new">Siemen Terpstra</a> in the late ’80’s. WebApp developed by <a href="http://jamesfenn.com/" target="new">James Fenn</a> with additions and modifications by <a href="http://brandlew.com/" target="new">Brandon Lewis</a>, <a href="http://whatmusicreallyis.com/" title="What Music Really İs" target="new">Bo Constantinsen</a> and <a href="https://sites.google.com/site/wangchengu/" target="new">Chengu Wang</a>. Credits to Scott Thompson and <a href="http://ozanyarman.com/" target="new">Dr Ozan Yarman</a> for contributing samples. Current version 1.1 (Jan. 2015 — Aug. 2016).
-        </div>
-    </div>
+		<div class="container">
+          Designed by <a href="http://siementerpstra.com/" target="new">Siemen Terpstra</a> in the late ’80’s. WebApp developed by <a href="http://jamesfenn.com/" target="new">James Fenn</a> with additions and modifications by <a href="http://brandlew.com/" target="new">Brandon Lewis</a>, <a href="http://whatmusicreallyis.com/" title="What Music Really İs" target="new">Bo Constantinsen</a> and <a href="https://sites.google.com/site/wangchengu/" target="new">Chengu Wang</a>. Credits to Scott Thompson and <a href="http://ozanyarman.com/" target="new">Dr Ozan Yarman</a> for contributing samples. Current version 1.2 (Jan. 2015 — Jan. 2017), released as Free/Libre and Open Source Software under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="new">GPL-3.0</a>. <a href="https://github.com/wcgbg/terpstrakeyboard/" target="new">Fork me on GitHub!</a>
+		</div>
+	</div>
 
-    <canvas id="keyboard" tabindex="1" width="1897" height="936" style="display: none; height: 936px; width: 1897px; margin-top: -468px; margin-left: -948.5px;"></canvas>
+	<canvas id="keyboard" tabindex="1" width="1897" height="936" style="display: none; height: 936px; width: 1897px; margin-top: -468px; margin-left: -948.5px;"></canvas>
 
-    <img alt="Return to keyboard design" src="back.png" id="backButton" onclick="back()" style="display: none;">
+	<img alt="Return to keyboard design" src="back.png" id="backButton" onclick="back()" style="display: none;">
 
-    <script src="keys.js"></script>
+	<script src="keys.js"></script>
 
 </body></html>
