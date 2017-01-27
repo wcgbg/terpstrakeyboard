@@ -1,4 +1,10 @@
 //check\set preset
+var init_keyboard_onload = true;
+if(decodeURIComponent(window.location.search) == '')
+{
+  init_keyboard_onload = false;
+}
+
 checkPreset(16);
 // fill in form
 document.getElementById('settingsForm').onsubmit = goKeyboard;
@@ -1147,7 +1153,7 @@ function nameToHex(colour) {
     "greenyellow": "#adff2f",
     "honeydew": "#f0fff0",
     "hotpink": "#ff69b4",
-    "indianred ": "#cd5c5c",
+    "indianred": "#cd5c5c",
     "indigo": "#4b0082",
     "ivory": "#fffff0",
     "khaki": "#f0e68c",
@@ -1334,4 +1340,14 @@ function checkPreset(init) {
 function noPreset() {
   ms = document.getElementById('quicklinks');
   ms.value = ms.options[0].value;
+}
+
+
+//initialize keyboard on load
+if(init_keyboard_onload)
+{
+  //hide landing page
+  document.getElementById('landing-page').style.display ='none';
+  
+  setTimeout(function(){ goKeyboard(); }, 1500);
 }
