@@ -379,6 +379,12 @@ function goKeyboard() {
     }, {
       fileName: "WMRIByzantineST",
       fade: 0.1
+    }, {
+      fileName: "WMRI-in6-har7-",
+      fade: 0.1
+    }, {
+      fileName: "WMRI-in7-har6-",
+      fade: 0.1
     }
 
   ];
