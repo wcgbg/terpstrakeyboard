@@ -1,3 +1,39 @@
+if(WebMidi){
+  WebMidi
+  .enable()
+  .then(onEnabled)
+  .catch(err => alert(err));
+}
+
+function onEnabled() {
+  if(WebMidi.outputs){
+    let midiOutMenu = document.createElement("optgroup")
+    midiOutMenu.setAttribute("label", "MIDI out");
+    document.getElementById("instrument").appendChild(midiOutMenu);
+    function addMidiOption(e){
+      let midiOption = document.createElement("option")
+      midiOption.setAttribute("value", e);
+      midiOption.textContent = e;
+      midiOutMenu.appendChild(midiOption);
+    }
+    WebMidi.outputs.forEach(output => addMidiOption(output.name));
+  }
+  //initialize keyboard on load
+  if(init_keyboard_onload)
+  {
+    //hide landing page
+    document.getElementById('landing-page').style.display ='none';
+    
+    document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "organ";
+    setTimeout(function(){ goKeyboard(); }, 1500);
+  }
+  window.addEventListener('beforeunload',(event) =>{
+    myOutput.sendAllSoundOff();
+  });
+}
+
+let myOutput = null;
+
 //check\set preset
 var init_keyboard_onload = true;
 if(decodeURIComponent(window.location.search) == '')
@@ -15,7 +51,7 @@ document.getElementById("rSteps").value = ("right" in getData) ? getData.right :
 document.getElementById("urSteps").value = ("upright" in getData) ? getData.upright : 2;
 document.getElementById("hexSize").value = ("size" in getData) ? getData.size : 50;
 document.getElementById("rotation").value = ("rotation" in getData) ? getData.rotation : 343.897886248;
-document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "organ";
+// document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "organ";  //have to move this to onEnabled(), otherwise the value of #instrument will be set to an option that doesn't exist yet
 document.getElementById("enum").checked = ("enum" in getData) ? JSON.parse(getData["enum"]) : false;
 document.getElementById("equivSteps").value = ("equivSteps" in getData) ? getData.equivSteps : 31;
 document.getElementById("spectrum_colors").checked = ("spectrum_colors" in getData) ? JSON.parse(getData.spectrum_colors) : false;
@@ -261,6 +297,9 @@ function back() {
     drawHex(coords, centsToColor(hexCoordsToCents(coords), false));
     settings.activeHexObjects.splice(0, 1);
   }
+  if(myOutput){
+    myOutput.sendAllSoundOff();
+  }
   // UI change
   document.getElementById("keyboard").style.display = "none";
   document.getElementById("backButton").style.display = "none";
@@ -391,8 +430,14 @@ function goKeyboard() {
 
   //console.log(instruments[instrumentOption]);
 
-  loadSample(instruments[instrumentOption].fileName, 0);
-  settings.sampleFadeout = instruments[instrumentOption].fade;
+  if(document.querySelector('#instrument option:checked').parentElement.label == 'MIDI out'){
+    myOutput = WebMidi.getOutputByName(document.querySelector('#instrument option:checked').textContent);
+    myOutput.sendAllSoundOff();
+  }else {
+    myOutput = null;
+    loadSample(instruments[instrumentOption].fileName, 0);
+    settings.sampleFadeout = instruments[instrumentOption].fade;
+  }
 
   // Set up keyboard, touch and mouse event handlers
 
@@ -990,13 +1035,26 @@ function HSVtoRGB2(h, s, v) {
   };
 }
 
+function getMidiFromCoords(e){
+  let midinote = new Note(
+    60  //  hardcoded C4
+    + e.coords.x*settings.rSteps
+    + e.coords.y*settings.urSteps
+  );
+  return midinote;
+}
+
 function ActiveHex(coords) {
   this.coords = coords;
   this.release = false;
   this.freq = 440;
 }
 
-ActiveHex.prototype.noteOn = function(cents) {
+ActiveHex.prototype.noteOn = function(cents, channel = 1) {
+  if(myOutput){
+    myOutput.playNote(getMidiFromCoords(this), [channel]);
+    return;
+  }
   var freq = settings.fundamental * Math.pow(2, cents / 1200);
   var source = settings.audioContext.createBufferSource(); // creates a sound source
   // Choose sample
@@ -1034,10 +1092,14 @@ ActiveHex.prototype.noteOn = function(cents) {
   this.gainNode = gainNode;
 };
 
-ActiveHex.prototype.noteOff = function() {
+ActiveHex.prototype.noteOff = function(channel = 1) {
   if (settings.sustain) {
     settings.sustainedNotes.push(this);
   } else {
+    if(myOutput){
+      myOutput.stopNote(getMidiFromCoords(this), [channel]);
+      return;
+    }
     var fadeout = settings.audioContext.currentTime + settings.sampleFadeout;
     if (this.gainNode) {
       this.gainNode.gain.setTargetAtTime(0, settings.audioContext.currentTime,
@@ -1349,11 +1411,14 @@ function noPreset() {
 }
 
 
-//initialize keyboard on load
-if(init_keyboard_onload)
-{
-  //hide landing page
-  document.getElementById('landing-page').style.display ='none';
-  
-  setTimeout(function(){ goKeyboard(); }, 1500);
+if(!WebMidi){
+  //initialize keyboard on load
+  if(init_keyboard_onload)
+  {
+    //hide landing page
+    document.getElementById('landing-page').style.display ='none';
+
+    document.getElementById("instrument").value = ("instrument" in getData) ? getData.instrument : "organ";
+    setTimeout(function(){ goKeyboard(); }, 1500);
+  }
 }
